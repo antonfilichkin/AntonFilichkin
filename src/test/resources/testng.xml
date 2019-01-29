@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="TestNg Suite" parallel="methods" thread-count="3" >
+<suite name="TestNg Suite" parallel="methods" thread-count="1" >
 
-    <test name="Test 1"   >
+    <test name="hw1">
 
         <classes>
-            <class name="lessons.SimpleDataProvider"></class>
+            <class name="hw1.testSiteBrowserInteractionTestHardAsserts"/>
+            <class name="hw1.testSiteBrowserInteractionTestSoftAsserts"/>
         </classes>
 
     </test>
