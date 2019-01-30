@@ -28,7 +28,7 @@ public class TextBelowPicturesTest extends SeleniumBase {
     @Test(dataProvider = "TextsDataProvider")
     public void textBelowPicturesTest(String icon, String text) {
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(25000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
         driver.navigate().to("https://epam.github.io/JDI/index.html");
 
         String xPath = "//span[contains(@class, '" + icon + "')]//../following-sibling::span";
