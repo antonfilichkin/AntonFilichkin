@@ -1,17 +1,18 @@
 package hw2.ex2;
 
+import base.Enums.Benefits;
+import base.Enums.TopMenuItems;
 import base.SeleniumBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
+import static base.Enums.HomePageData.*;
+import static base.Enums.HomePageSelectors.*;
+import static base.Enums.Users.PITER_CHAILOVSKII;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -19,285 +20,252 @@ public class testSiteBrowserInteractionRegressionTest extends SeleniumBase {
 
     @Test(groups = {"Regression"})
     public void homePageContentTestRegression1() {
-
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
+        WebDriver driver = getWebDriver();
 
         // 1 Open test site by URL
-        driver.navigate().to("https://epam.github.io/JDI/index.html");
+        driver.navigate().to(TEST_PAGE_URL.toString());
 
         // 2 Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 3 Perform login
-        driver.findElement(By.cssSelector("[id='user-icon']")).click();
-        driver.findElement(By.cssSelector("[id='name']")).sendKeys("epam");
-        driver.findElement(By.cssSelector("[id='password']")).sendKeys("1234");
-        driver.findElement(By.cssSelector("[id='login-button']")).click();
+        driver.findElement(By.cssSelector(USER_ICON_CSS.toString())).click();
+        driver.findElement(By.cssSelector(USER_NAME_INPUT_CSS.toString())).sendKeys(PITER_CHAILOVSKII.getLogin());
+        driver.findElement(By.cssSelector(USER_PASS_INPUT_CSS.toString())).sendKeys(PITER_CHAILOVSKII.getPass());
+        driver.findElement(By.cssSelector(LOGIN_BUTTON_CSS.toString())).click();
 
         // 4 Assert User name in the left-top side of screen that user is logged in
-        assertTrue(driver.findElement(By.cssSelector("[id='user-name']")).isDisplayed());
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        WebElement element = driver.findElement(By.cssSelector(USER_NAME_TEXT_CSS.toString()));
+        assertTrue(element.isDisplayed());
+        assertEquals(element.getText(), PITER_CHAILOVSKII.getName().toUpperCase());
 
         // 5 Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int headerItems = 4;
-        String[] headerItemsTexts = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
+        int expected_items = TopMenuItems.getSize();
+        List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
+        assertEquals(topMenuItemsActual.size(), expected_items);
 
-        List<WebElement> headerSectionItems = driver.findElements(By.cssSelector(".navbar-nav.m-l8 > li"));
-        assertEquals(headerSectionItems.size(), headerItems);
-
-        for (int i = 0; i < headerItems; ++i){
-            assertTrue(headerSectionItems.get(i).isDisplayed());
-            assertEquals(headerSectionItems.get(i).getText(), headerItemsTexts[i]);
+        TopMenuItems[] topMenuItemsExpected = TopMenuItems.values();
+        for (int i = 0; i < expected_items; ++i) {
+            assertTrue(topMenuItemsActual.get(i).isDisplayed());
+            assertEquals(topMenuItemsActual.get(i).getText(), topMenuItemsExpected[i].toString());
         }
 
         // 7 Assert that there are 4 images on the Index Page and they are displayed
-        List<WebElement> benefitsImages = driver.findElements(By.cssSelector(".benefit > .benefit-icon"));
-        assertEquals(benefitsImages.size(), 4);
+        expected_items = Benefits.getSize();
+        List<WebElement> benefitsImages = driver.findElements(By.cssSelector(BENEFIT_ICONS_CSS.toString()));
+        assertEquals(benefitsImages.size(), expected_items);
 
-        String[] benefitsImagesCssSelectors = {".icon-practise", ".icon-custom", ".icon-multi", ".icon-base"};
-        for (int i = 0; i < 4; ++i) {
-            assertTrue(benefitsImages.get(i).findElement(By.cssSelector(benefitsImagesCssSelectors[i])).isDisplayed());
+        Benefits[] benefits = Benefits.values();
+        for (int i = 0; i < expected_items; ++i) {
+            assertTrue(benefitsImages.get(i).findElement(By.cssSelector(benefits[i].getIcon())).isDisplayed());
         }
 
         // 8 Assert that there are 4 texts on the Index Page under icons and they have proper text
-        List<WebElement> benefitsTexts = driver.findElements(By.cssSelector(".benefit-icon + span"));
-        assertEquals(benefitsTexts.size(), 4);
+        List<WebElement> benefitsTexts = driver.findElements(By.cssSelector(BENEFIT_TEXTS_CSS.toString()));
+        assertEquals(benefitsTexts.size(), expected_items);
 
-        String[] benefitImagesExpectedTexts = {
-                "To include good practices\nand ideas from successful\nEPAM project",
-                "To be flexible and\ncustomizable",
-                "To be multiplatform",
-                "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…"};
-
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < expected_items; ++i) {
             assertTrue(benefitsTexts.get(i).isDisplayed());
-            assertEquals(benefitsTexts.get(i).getText(), benefitImagesExpectedTexts[i]);
+            assertEquals(benefitsTexts.get(i).getText(), benefits[i].getText());
         }
 
         // 9 Assert a text of the main headers
-        assertEquals(driver.findElement(By.cssSelector("h3.main-title")).getText(), "EPAM FRAMEWORK WISHES…");
-        assertEquals(driver.findElement(By.cssSelector("p.main-txt")).getText(), "LOREM IPSUM DOLOR SIT AMET," +
-                " CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT" +
-                " ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT" +
-                " DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
+        assertEquals(driver.findElement(By.cssSelector(MAIN_TITLE_CSS.toString())).getText(), MAIN_HEADER_TITLE.toString());
+        assertEquals(driver.findElement(By.cssSelector(MAIN_TEXT.toString())).getText(), MAIN_HEADER_TEXT.toString());
 
         // 10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElement(By.cssSelector("[id='iframe']")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(IFRAME_CSS.toString())).isDisplayed());
 
         // 11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-        driver.switchTo().frame("iframe");
-        assertTrue(driver.findElement(By.cssSelector(("img[id = 'epam_logo']"))).isDisplayed());
+        driver.switchTo().frame(IFRAME_NAME.toString());
+        assertTrue(driver.findElement(By.cssSelector((EPAM_LOGO_CSS.toString()))).isDisplayed());
 
         // 12 Switch to original window back
         driver.switchTo().parentFrame();
 
         // 13 Assert a text of the sub header
-        WebElement subHeader = driver.findElement(By.cssSelector("h3.text-center > a"));
-        assertEquals(subHeader.getText(), "JDI GITHUB");
+        WebElement subHeader = driver.findElement(By.cssSelector(SUB_HEADER_CSS.toString()));
+        assertEquals(subHeader.getText(), SUB_HEADER_TEXT.toString());
 
         // 14 Assert that JDI GITHUB is a link and has a proper URL
-        assertEquals(subHeader.getAttribute("href"), "https://github.com/epam/JDI");
+        assertEquals(subHeader.getAttribute("href"), SUB_HEADER_URL.toString());
 
         // 15 Assert that there is Left Section
-        assertTrue(driver.findElement(By.cssSelector(".uui-side-bar")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(LEFT_SECTION_CSS.toString())).isDisplayed());
 
         // 16 Assert that there is Footer
-        assertTrue(driver.findElement(By.cssSelector(".footer-bg")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(FOOTER_CSS.toString())).isDisplayed());
 
         driver.close();
     }
 
     @Test(groups = {"Regression"})
     public void homePageContentTestRegression2() {
-
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
+        WebDriver driver = getWebDriver();
 
         // 1 Open test site by URL
-        driver.navigate().to("https://epam.github.io/JDI/index.html");
+        driver.navigate().to(TEST_PAGE_URL.toString());
 
         // 2 Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 3 Perform login
-        driver.findElement(By.cssSelector("[id='user-icon']")).click();
-        driver.findElement(By.cssSelector("[id='name']")).sendKeys("epam");
-        driver.findElement(By.cssSelector("[id='password']")).sendKeys("1234");
-        driver.findElement(By.cssSelector("[id='login-button']")).click();
+        driver.findElement(By.cssSelector(USER_ICON_CSS.toString())).click();
+        driver.findElement(By.cssSelector(USER_NAME_INPUT_CSS.toString())).sendKeys(PITER_CHAILOVSKII.getLogin());
+        driver.findElement(By.cssSelector(USER_PASS_INPUT_CSS.toString())).sendKeys(PITER_CHAILOVSKII.getPass());
+        driver.findElement(By.cssSelector(LOGIN_BUTTON_CSS.toString())).click();
 
         // 4 Assert User name in the left-top side of screen that user is logged in
-        assertTrue(driver.findElement(By.cssSelector("[id='user-name']")).isDisplayed());
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        WebElement element = driver.findElement(By.cssSelector(USER_NAME_TEXT_CSS.toString()));
+        assertTrue(element.isDisplayed());
+        assertEquals(element.getText(), PITER_CHAILOVSKII.getName().toUpperCase());
 
         // 5 Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int headerItems = 4;
-        String[] headerItemsTexts = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
+        int expected_items = TopMenuItems.getSize();
+        List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
+        assertEquals(topMenuItemsActual.size(), expected_items);
 
-        List<WebElement> headerSectionItems = driver.findElements(By.cssSelector(".navbar-nav.m-l8 > li"));
-        assertEquals(headerSectionItems.size(), headerItems);
-
-        for (int i = 0; i < headerItems; ++i){
-            assertTrue(headerSectionItems.get(i).isDisplayed());
-            assertEquals(headerSectionItems.get(i).getText(), headerItemsTexts[i]);
+        TopMenuItems[] topMenuItemsExpected = TopMenuItems.values();
+        for (int i = 0; i < expected_items; ++i) {
+            assertTrue(topMenuItemsActual.get(i).isDisplayed());
+            assertEquals(topMenuItemsActual.get(i).getText(), topMenuItemsExpected[i].toString());
         }
 
         // 7 Assert that there are 4 images on the Index Page and they are displayed
-        List<WebElement> benefitsImages = driver.findElements(By.cssSelector(".benefit > .benefit-icon"));
-        assertEquals(benefitsImages.size(), 4);
+        expected_items = Benefits.getSize();
+        List<WebElement> benefitsImages = driver.findElements(By.cssSelector(BENEFIT_ICONS_CSS.toString()));
+        assertEquals(benefitsImages.size(), expected_items);
 
-        String[] benefitsImagesCssSelectors = {".icon-practise", ".icon-custom", ".icon-multi", ".icon-base"};
-        for (int i = 0; i < 4; ++i) {
-            assertTrue(benefitsImages.get(i).findElement(By.cssSelector(benefitsImagesCssSelectors[i])).isDisplayed());
+        Benefits[] benefits = Benefits.values();
+        for (int i = 0; i < expected_items; ++i) {
+            assertTrue(benefitsImages.get(i).findElement(By.cssSelector(benefits[i].getIcon())).isDisplayed());
         }
 
         // 8 Assert that there are 4 texts on the Index Page under icons and they have proper text
-        List<WebElement> benefitsTexts = driver.findElements(By.cssSelector(".benefit-icon + span"));
-        assertEquals(benefitsTexts.size(), 4);
+        List<WebElement> benefitsTexts = driver.findElements(By.cssSelector(BENEFIT_TEXTS_CSS.toString()));
+        assertEquals(benefitsTexts.size(), expected_items);
 
-        String[] benefitImagesExpectedTexts = {
-                "To include good practices\nand ideas from successful\nEPAM project",
-                "To be flexible and\ncustomizable",
-                "To be multiplatform",
-                "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…"};
-
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < expected_items; ++i) {
             assertTrue(benefitsTexts.get(i).isDisplayed());
-            assertEquals(benefitsTexts.get(i).getText(), benefitImagesExpectedTexts[i]);
+            assertEquals(benefitsTexts.get(i).getText(), benefits[i].getText());
         }
 
         // 9 Assert a text of the main headers
-        assertEquals(driver.findElement(By.cssSelector("h3.main-title")).getText(), "EPAM FRAMEWORK WISHES…");
-        assertEquals(driver.findElement(By.cssSelector("p.main-txt")).getText(), "LOREM IPSUM DOLOR SIT AMET," +
-                " CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT" +
-                " ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT" +
-                " DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
+        assertEquals(driver.findElement(By.cssSelector(MAIN_TITLE_CSS.toString())).getText(), MAIN_HEADER_TITLE.toString());
+        assertEquals(driver.findElement(By.cssSelector(MAIN_TEXT.toString())).getText(), MAIN_HEADER_TEXT.toString());
 
         // 10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElement(By.cssSelector("[id='iframe']")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(IFRAME_CSS.toString())).isDisplayed());
 
         // 11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-        driver.switchTo().frame("iframe");
-        assertTrue(driver.findElement(By.cssSelector(("img[id = 'epam_logo']"))).isDisplayed());
+        driver.switchTo().frame(IFRAME_NAME.toString());
+        assertTrue(driver.findElement(By.cssSelector((EPAM_LOGO_CSS.toString()))).isDisplayed());
 
         // 12 Switch to original window back
         driver.switchTo().parentFrame();
 
         // 13 Assert a text of the sub header
-        WebElement subHeader = driver.findElement(By.cssSelector("h3.text-center > a"));
-        assertEquals(subHeader.getText(), "JDI GITHUB");
+        WebElement subHeader = driver.findElement(By.cssSelector(SUB_HEADER_CSS.toString()));
+        assertEquals(subHeader.getText(), SUB_HEADER_TEXT.toString());
 
         // 14 Assert that JDI GITHUB is a link and has a proper URL
-        assertEquals(subHeader.getAttribute("href"), "https://github.com/epam/JDI");
+        assertEquals(subHeader.getAttribute("href"), SUB_HEADER_URL.toString());
 
         // 15 Assert that there is Left Section
-        assertTrue(driver.findElement(By.cssSelector(".uui-side-bar")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(LEFT_SECTION_CSS.toString())).isDisplayed());
 
         // 16 Assert that there is Footer
-        assertTrue(driver.findElement(By.cssSelector(".footer-bg")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(FOOTER_CSS.toString())).isDisplayed());
 
         driver.close();
     }
 
     @Test(groups = {"Regression"})
     public void homePageContentTestRegression3() {
-
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
+        WebDriver driver = getWebDriver();
 
         // 1 Open test site by URL
-        driver.navigate().to("https://epam.github.io/JDI/index.html");
+        driver.navigate().to(TEST_PAGE_URL.toString());
 
         // 2 Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 3 Perform login
-        driver.findElement(By.cssSelector("[id='user-icon']")).click();
-        driver.findElement(By.cssSelector("[id='name']")).sendKeys("epam");
-        driver.findElement(By.cssSelector("[id='password']")).sendKeys("1234");
-        driver.findElement(By.cssSelector("[id='login-button']")).click();
+        driver.findElement(By.cssSelector(USER_ICON_CSS.toString())).click();
+        driver.findElement(By.cssSelector(USER_NAME_INPUT_CSS.toString())).sendKeys(PITER_CHAILOVSKII.getLogin());
+        driver.findElement(By.cssSelector(USER_PASS_INPUT_CSS.toString())).sendKeys(PITER_CHAILOVSKII.getPass());
+        driver.findElement(By.cssSelector(LOGIN_BUTTON_CSS.toString())).click();
 
         // 4 Assert User name in the left-top side of screen that user is logged in
-        assertTrue(driver.findElement(By.cssSelector("[id='user-name']")).isDisplayed());
-        assertEquals(driver.findElement(By.cssSelector("[id='user-name']")).getText(), "PITER CHAILOVSKII");
+        WebElement element = driver.findElement(By.cssSelector(USER_NAME_TEXT_CSS.toString()));
+        assertTrue(element.isDisplayed());
+        assertEquals(element.getText(), PITER_CHAILOVSKII.getName().toUpperCase());
 
         // 5 Assert Browser title
-        assertEquals(driver.getTitle(), "Home Page");
+        assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int headerItems = 4;
-        String[] headerItemsTexts = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
+        int expected_items = TopMenuItems.getSize();
+        List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
+        assertEquals(topMenuItemsActual.size(), expected_items);
 
-        List<WebElement> headerSectionItems = driver.findElements(By.cssSelector(".navbar-nav.m-l8 > li"));
-        assertEquals(headerSectionItems.size(), headerItems);
-
-        for (int i = 0; i < headerItems; ++i){
-            assertTrue(headerSectionItems.get(i).isDisplayed());
-            assertEquals(headerSectionItems.get(i).getText(), headerItemsTexts[i]);
+        TopMenuItems[] topMenuItemsExpected = TopMenuItems.values();
+        for (int i = 0; i < expected_items; ++i) {
+            assertTrue(topMenuItemsActual.get(i).isDisplayed());
+            assertEquals(topMenuItemsActual.get(i).getText(), topMenuItemsExpected[i].toString());
         }
 
         // 7 Assert that there are 4 images on the Index Page and they are displayed
-        List<WebElement> benefitsImages = driver.findElements(By.cssSelector(".benefit > .benefit-icon"));
-        assertEquals(benefitsImages.size(), 4);
+        expected_items = Benefits.getSize();
+        List<WebElement> benefitsImages = driver.findElements(By.cssSelector(BENEFIT_ICONS_CSS.toString()));
+        assertEquals(benefitsImages.size(), expected_items);
 
-        String[] benefitsImagesCssSelectors = {".icon-practise", ".icon-custom", ".icon-multi", ".icon-base"};
-        for (int i = 0; i < 4; ++i) {
-            assertTrue(benefitsImages.get(i).findElement(By.cssSelector(benefitsImagesCssSelectors[i])).isDisplayed());
+        Benefits[] benefits = Benefits.values();
+        for (int i = 0; i < expected_items; ++i) {
+            assertTrue(benefitsImages.get(i).findElement(By.cssSelector(benefits[i].getIcon())).isDisplayed());
         }
 
         // 8 Assert that there are 4 texts on the Index Page under icons and they have proper text
-        List<WebElement> benefitsTexts = driver.findElements(By.cssSelector(".benefit-icon + span"));
-        assertEquals(benefitsTexts.size(), 4);
+        List<WebElement> benefitsTexts = driver.findElements(By.cssSelector(BENEFIT_TEXTS_CSS.toString()));
+        assertEquals(benefitsTexts.size(), expected_items);
 
-        String[] benefitImagesExpectedTexts = {
-                "To include good practices\nand ideas from successful\nEPAM project",
-                "To be flexible and\ncustomizable",
-                "To be multiplatform",
-                "Already have good base\n(about 20 internal and\nsome external projects),\nwish to get more…"};
-
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < expected_items; ++i) {
             assertTrue(benefitsTexts.get(i).isDisplayed());
-            assertEquals(benefitsTexts.get(i).getText(), benefitImagesExpectedTexts[i]);
+            assertEquals(benefitsTexts.get(i).getText(), benefits[i].getText());
         }
 
         // 9 Assert a text of the main headers
-        assertEquals(driver.findElement(By.cssSelector("h3.main-title")).getText(), "EPAM FRAMEWORK WISHES…");
-        assertEquals(driver.findElement(By.cssSelector("p.main-txt")).getText(), "LOREM IPSUM DOLOR SIT AMET," +
-                " CONSECTETUR ADIPISICING ELIT, SED DO EIUSMOD TEMPOR INCIDIDUNT UT LABORE ET DOLORE MAGNA ALIQUA. UT" +
-                " ENIM AD MINIM VENIAM, QUIS NOSTRUD EXERCITATION ULLAMCO LABORIS NISI UT ALIQUIP EX EA COMMODO CONSEQUAT" +
-                " DUIS AUTE IRURE DOLOR IN REPREHENDERIT IN VOLUPTATE VELIT ESSE CILLUM DOLORE EU FUGIAT NULLA PARIATUR.");
+        assertEquals(driver.findElement(By.cssSelector(MAIN_TITLE_CSS.toString())).getText(), MAIN_HEADER_TITLE.toString());
+        assertEquals(driver.findElement(By.cssSelector(MAIN_TEXT.toString())).getText(), MAIN_HEADER_TEXT.toString());
 
         // 10 Assert that there is the iframe in the center of page
-        assertTrue(driver.findElement(By.cssSelector("[id='iframe']")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(IFRAME_CSS.toString())).isDisplayed());
 
         // 11 Switch to the iframe and check that there is Epam logo in the left top conner of iframe
-        driver.switchTo().frame("iframe");
-        assertTrue(driver.findElement(By.cssSelector(("img[id = 'epam_logo']"))).isDisplayed());
+        driver.switchTo().frame(IFRAME_NAME.toString());
+        assertTrue(driver.findElement(By.cssSelector((EPAM_LOGO_CSS.toString()))).isDisplayed());
 
         // 12 Switch to original window back
         driver.switchTo().parentFrame();
 
         // 13 Assert a text of the sub header
-        WebElement subHeader = driver.findElement(By.cssSelector("h3.text-center > a"));
-        assertEquals(subHeader.getText(), "JDI GITHUB");
+        WebElement subHeader = driver.findElement(By.cssSelector(SUB_HEADER_CSS.toString()));
+        assertEquals(subHeader.getText(), SUB_HEADER_TEXT.toString());
 
         // 14 Assert that JDI GITHUB is a link and has a proper URL
-        assertEquals(subHeader.getAttribute("href"), "https://github.com/epam/JDI");
+        assertEquals(subHeader.getAttribute("href"), SUB_HEADER_URL.toString());
 
         // 15 Assert that there is Left Section
-        assertTrue(driver.findElement(By.cssSelector(".uui-side-bar")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(LEFT_SECTION_CSS.toString())).isDisplayed());
 
         // 16 Assert that there is Footer
-        assertTrue(driver.findElement(By.cssSelector(".footer-bg")).isDisplayed());
+        assertTrue(driver.findElement(By.cssSelector(FOOTER_CSS.toString())).isDisplayed());
 
         driver.close();
     }

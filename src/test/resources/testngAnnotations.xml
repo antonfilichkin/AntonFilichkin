@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestNg Suite" parallel="classes" thread-count="1">
+
+    <test name="hw2.ex2.Annotations">
+
+        <classes>
+            <class name="hw2.ex3.testSiteBrowserInteractionAnnotations"/>
+        </classes>
+
+    </test>
+
+</suite>

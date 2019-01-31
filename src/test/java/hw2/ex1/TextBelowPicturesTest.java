@@ -4,12 +4,10 @@ import base.SeleniumBase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
+import static base.Enums.HomePageData.TEST_PAGE_URL;
 import static org.testng.Assert.assertEquals;
 
 
@@ -27,9 +25,8 @@ public class TextBelowPicturesTest extends SeleniumBase {
 
     @Test(dataProvider = "TextsDataProvider")
     public void textBelowPicturesTest(String icon, String text) {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
-        driver.navigate().to("https://epam.github.io/JDI/index.html");
+        WebDriver driver =  getWebDriver();
+        driver.navigate().to(TEST_PAGE_URL.toString());
 
         String xPath = "//span[contains(@class, '" + icon + "')]//../following-sibling::span";
         assertEquals(driver.findElement(By.xpath(xPath)).getText(), text);
