@@ -55,7 +55,7 @@ public class testSiteBrowserInteractionTestHardAsserts extends SeleniumBase {
         List<WebElement> headerSectionItems = driver.findElements(By.cssSelector(".navbar-nav.m-l8 > li"));
         assertEquals(headerSectionItems.size(), headerItems);
 
-        for (int i = 0; i < headerItems; ++i){
+        for (int i = 0; i < headerItems; ++i) {
             assertTrue(headerSectionItems.get(i).isDisplayed());
             assertEquals(headerSectionItems.get(i).getText(), headerItemsTexts[i]);
         }
@@ -115,12 +115,9 @@ public class testSiteBrowserInteractionTestHardAsserts extends SeleniumBase {
         assertTrue(driver.findElement(By.cssSelector(".footer-bg")).isDisplayed());
     }
 
-
     // 17 Close Browser
     @AfterMethod
     public void AfterMethod() {
         driver.close();
-
     }
-
 }
