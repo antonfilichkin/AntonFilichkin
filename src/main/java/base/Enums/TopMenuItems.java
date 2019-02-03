@@ -1,10 +1,10 @@
 package base.Enums;
 
 public enum TopMenuItems {
-    HOME ("HOME"),
-    CONTACT_FORM ("CONTACT FORM"),
-    SERVICE ("SERVICE"),
-    METALS_COLORS ("METALS & COLORS");
+    HOME("HOME"),
+    CONTACT_FORM("CONTACT FORM"),
+    SERVICE("SERVICE"),
+    METALS_COLORS("METALS & COLORS");
 
     private static final int size = TopMenuItems.values().length;
 
@@ -16,6 +16,15 @@ public enum TopMenuItems {
 
     public static int getSize() {
         return size;
+    }
+
+    public static String[] getAll() {
+        String[] allItems = new String[size];
+        int i = 0;
+        for (TopMenuItems items : TopMenuItems.values()) {
+            allItems[i++] = items.toString();
+        }
+        return allItems;
     }
 
     @Override

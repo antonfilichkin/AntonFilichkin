@@ -1,7 +1,7 @@
 package base.Enums;
 
 public enum Users {
-    PITER_CHAILOVSKII ("Piter Chailovskii", "epam", "1234");
+    PITER_CHAILOVSKII("Piter Chailovskii", "epam", "1234");
 
     private final String name;
     private final String login;
