@@ -15,10 +15,4 @@ public abstract class SeleniumBase {
         setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
     }
 
-    static public WebDriver getWebDriver() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10000, TimeUnit.MILLISECONDS);
-        return driver;
-    }
 }

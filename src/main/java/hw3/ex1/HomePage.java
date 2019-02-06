@@ -68,7 +68,6 @@ public class HomePage {
 
     void openPage(HomePageData pageURL) {
         driver.get(pageURL.toString());
-
     }
 
     void assertBrowserTitle(HomePageData expectedPageName) {

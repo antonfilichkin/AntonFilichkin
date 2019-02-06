@@ -6,6 +6,7 @@ import base.SeleniumBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class testSiteBrowserInteractionRegressionTest extends SeleniumBase {
 
     @Test(groups = {"Regression"})
     public void homePageContentTestRegression1() {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = new ChromeDriver();
 
         // 1 Open test site by URL
         driver.navigate().to(TEST_PAGE_URL.toString());
@@ -104,7 +105,7 @@ public class testSiteBrowserInteractionRegressionTest extends SeleniumBase {
 
     @Test(groups = {"Regression"})
     public void homePageContentTestRegression2() {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = new ChromeDriver();
 
         // 1 Open test site by URL
         driver.navigate().to(TEST_PAGE_URL.toString());
@@ -188,7 +189,7 @@ public class testSiteBrowserInteractionRegressionTest extends SeleniumBase {
 
     @Test(groups = {"Regression"})
     public void homePageContentTestRegression3() {
-        WebDriver driver = getWebDriver();
+        WebDriver driver = new ChromeDriver();
 
         // 1 Open test site by URL
         driver.navigate().to(TEST_PAGE_URL.toString());

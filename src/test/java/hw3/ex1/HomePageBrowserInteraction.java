@@ -4,19 +4,21 @@ import base.Enums.Benefits;
 import base.Enums.TopMenuItems;
 import base.SeleniumBase;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
 import static base.Enums.HomePageData.*;
 import static base.Enums.Users.PITER_CHAILOVSKII;
 
-public class HomePageBrowserInteraction {
+public class HomePageBrowserInteraction extends SeleniumBase{
     private HomePage homePage;
     private WebDriver driver;
 
     @BeforeMethod
-    public void BeforeMethod() {
-        driver = SeleniumBase.getWebDriver();
+    public void BeforeMethod(){
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
         homePage = PageFactory.initElements(driver, HomePage.class);
     }
 
