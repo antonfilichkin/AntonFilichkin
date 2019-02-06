@@ -10,6 +10,8 @@ import org.testng.annotations.*;
 import static base.Enums.HomePageData.*;
 import static base.Enums.Users.PITER_CHAILOVSKII;
 
+// TODO What is the reason of this inheritance ?
+// TODO You are going to create WD twice..
 public class HomePageBrowserInteraction extends SeleniumBase {
     private HomePage homePage;
     private WebDriver driver;
@@ -27,6 +29,9 @@ public class HomePageBrowserInteraction extends SeleniumBase {
 
     @Test
     public void homePageContentTest() {
+        // TODO In general, your approach is OK, but it will be better to
+        // TODO parametrise PO methods by ENUM itself instead of String
+
         // 1 Open test site by URL
         homePage.openPage(TEST_PAGE_URL.toString());
 
@@ -34,6 +39,7 @@ public class HomePageBrowserInteraction extends SeleniumBase {
         homePage.assertBrowserTitle(TEST_PAGE_TITLE.toString());
 
         // 3 Perform login
+        // TODO You can parametrise this method by Users enum, this will improve readability and reliability
         homePage.login(PITER_CHAILOVSKII.getLogin(), PITER_CHAILOVSKII.getPass());
 
         // 4 Assert User name in the left-top side of screen that user is logged in

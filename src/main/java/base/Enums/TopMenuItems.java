@@ -19,8 +19,10 @@ public enum TopMenuItems {
     }
 
     public static String[] getAll() {
+        // TODO This will be better with List
         String[] allItems = new String[size];
         int i = 0;
+        // TODO What is the reason of foreach loop with local variable 'i' ?
         for (TopMenuItems items : TopMenuItems.values()) {
             allItems[i++] = items.toString();
         }
