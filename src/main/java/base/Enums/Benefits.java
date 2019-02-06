@@ -22,24 +22,6 @@ public enum Benefits {
         return size;
     }
 
-    public static String[] getAllIcons() {
-        String[] allItems = new String[size];
-        int i = 0;
-        for (Benefits benefits : Benefits.values()) {
-            allItems[i++] = benefits.iconSelector.toString();
-        }
-        return allItems;
-    }
-
-    public static String[] getAllTexts() {
-        String[] allItems = new String[size];
-        int i = 0;
-        for (Benefits benefits : Benefits.values()) {
-            allItems[i++] = benefits.text;
-        }
-        return allItems;
-    }
-
     public String getIcon() {
         return iconSelector.toString();
     }

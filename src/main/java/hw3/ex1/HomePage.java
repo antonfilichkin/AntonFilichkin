@@ -1,5 +1,9 @@
 package hw3.ex1;
 
+import base.Enums.Benefits;
+import base.Enums.HomePageData;
+import base.Enums.TopMenuItems;
+import base.Enums.Users;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,63 +66,63 @@ public class HomePage {
         this.driver = driver;
     }
 
-    void openPage(String pageURL) {
-        driver.get(pageURL);
+    void openPage(HomePageData pageURL) {
+        driver.get(pageURL.toString());
 
     }
 
-    void assertBrowserTitle(String pageName) {
-        assertEquals(driver.getTitle(), pageName);
+    void assertBrowserTitle(HomePageData expectedPageName) {
+        assertEquals(driver.getTitle(), expectedPageName.toString());
     }
 
-    void login(String name, String password) {
+    void login(Users user) {
         userIcon.click();
-        userName.sendKeys(name);
-        userPass.sendKeys(password);
+        userName.sendKeys(user.getLogin());
+        userPass.sendKeys(user.getPass());
         loginButton.click();
     }
 
-    void assertUserName(String userName) {
+    void assertUserName(Users userName) {
         assertTrue(userNameText.isDisplayed());
-        assertEquals(userNameText.getText(), userName);
+        assertEquals(userNameText.getText(), userName.getName().toUpperCase());
     }
 
-    void assertHeaderItems(String[] expectedItemsTexts) {
-        int expectedSize = expectedItemsTexts.length;
+    void assertHeaderItems(TopMenuItems... expectedTopMenuItems) {
+        int expectedSize = expectedTopMenuItems.length;
         assertEquals(navbarElements.size(), expectedSize);
 
         for (int i = 0; i < expectedSize; ++i) {
             assertTrue(navbarElements.get(i).isDisplayed());
-            assertEquals(navbarElements.get(i).getText(), expectedItemsTexts[i]);
+            assertEquals(navbarElements.get(i).getText(), expectedTopMenuItems[i].toString());
         }
     }
 
-    void assertBenefitImages(String[] expectedBenefitImages) {
+    void assertBenefitImages(Benefits... expectedBenefitImages) {
         int expectedSize = expectedBenefitImages.length;
         assertEquals(benefitIcons.size(), expectedSize);
 
         for (int i = 0; i < expectedSize; ++i) {
             assertTrue(benefitIcons.get(i).isDisplayed());
-            assertTrue(benefitIcons.get(i).findElement(By.cssSelector(expectedBenefitImages[i])).isDisplayed());
+            assertTrue(benefitIcons.get(i).findElement(By.cssSelector(expectedBenefitImages[i].getIcon())).isDisplayed());
         }
     }
 
-    void assertTextsUnderBenefitIcons(String[] expectedBenefitTexts) {
+    void assertTextsUnderBenefitIcons(Benefits... expectedBenefitTexts) {
         int expectedSize = expectedBenefitTexts.length;
         assertEquals(benefitTexts.size(), expectedSize);
 
         for (int i = 0; i < expectedSize; ++i) {
             assertTrue(benefitTexts.get(i).isDisplayed());
-            assertEquals(benefitTexts.get(i).getText(), expectedBenefitTexts[i]);
+            assertEquals(benefitTexts.get(i).getText(), expectedBenefitTexts[i].getText());
         }
     }
 
-    void assertMainHeaderTitle(String expectedHeaderTitle) {
-        assertEquals(mainTitle.getText(), expectedHeaderTitle);
+    void assertMainHeaderTitle(HomePageData expectedHeaderTitle) {
+        assertEquals(mainTitle.getText(), expectedHeaderTitle.toString());
     }
 
-    void assertMainHeaderText(String expectedHeaderText) {
-        assertEquals(mainText.getText(), expectedHeaderText);
+    void assertMainHeaderText(HomePageData expectedHeaderText) {
+        assertEquals(mainText.getText(), expectedHeaderText.toString());
     }
 
     void assertIframeIsPresent() {
@@ -138,12 +142,12 @@ public class HomePage {
         System.out.println(epamLogo.toString());
     }
 
-    void assertSubHeaderText(String text) {
-        assertEquals(subHeader.getText(), text);
+    void assertSubHeaderText(HomePageData expectedSubHeaderText) {
+        assertEquals(subHeader.getText(), expectedSubHeaderText.toString());
     }
 
-    void assertSubHeaderLink(String subHeaderURL) {
-        assertEquals(subHeader.getAttribute("href"), subHeaderURL);
+    void assertSubHeaderLink(HomePageData expectedSubHeaderURL) {
+        assertEquals(subHeader.getAttribute("href"), expectedSubHeaderURL.toString());
     }
 
     void assertLeftSectionIsPresent() {

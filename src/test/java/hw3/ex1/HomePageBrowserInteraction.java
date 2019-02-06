@@ -10,15 +10,13 @@ import org.testng.annotations.*;
 import static base.Enums.HomePageData.*;
 import static base.Enums.Users.PITER_CHAILOVSKII;
 
-// TODO What is the reason of this inheritance ?
-// TODO You are going to create WD twice..
-public class HomePageBrowserInteraction extends SeleniumBase {
+public class HomePageBrowserInteraction {
     private HomePage homePage;
     private WebDriver driver;
 
     @BeforeMethod
     public void BeforeMethod() {
-        driver = getWebDriver();
+        driver = SeleniumBase.getWebDriver();
         homePage = PageFactory.initElements(driver, HomePage.class);
     }
 
@@ -29,37 +27,33 @@ public class HomePageBrowserInteraction extends SeleniumBase {
 
     @Test
     public void homePageContentTest() {
-        // TODO In general, your approach is OK, but it will be better to
-        // TODO parametrise PO methods by ENUM itself instead of String
-
         // 1 Open test site by URL
-        homePage.openPage(TEST_PAGE_URL.toString());
+        homePage.openPage(TEST_PAGE_URL);
 
         // 2 Assert Browser title
-        homePage.assertBrowserTitle(TEST_PAGE_TITLE.toString());
+        homePage.assertBrowserTitle(TEST_PAGE_TITLE);
 
         // 3 Perform login
-        // TODO You can parametrise this method by Users enum, this will improve readability and reliability
-        homePage.login(PITER_CHAILOVSKII.getLogin(), PITER_CHAILOVSKII.getPass());
+        homePage.login(PITER_CHAILOVSKII);
 
         // 4 Assert User name in the left-top side of screen that user is logged in
-        homePage.assertUserName(PITER_CHAILOVSKII.getName().toUpperCase());
+        homePage.assertUserName(PITER_CHAILOVSKII);
 
         // 5 Assert Browser title
-        homePage.assertBrowserTitle(TEST_PAGE_TITLE.toString());
+        homePage.assertBrowserTitle(TEST_PAGE_TITLE);
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        homePage.assertHeaderItems(TopMenuItems.getAll());
+        homePage.assertHeaderItems(TopMenuItems.values());
 
         // 7 Assert that there are 4 images on the Index Page and they are displayed
-        homePage.assertBenefitImages(Benefits.getAllIcons());
+        homePage.assertBenefitImages(Benefits.values());
 
         // 8 Assert that there are 4 texts on the Index Page under icons and they have proper text
-        homePage.assertTextsUnderBenefitIcons(Benefits.getAllTexts());
+        homePage.assertTextsUnderBenefitIcons(Benefits.values());
 
         // 9 Assert a text of the main headers
-        homePage.assertMainHeaderTitle(MAIN_HEADER_TITLE.toString());
-        homePage.assertMainHeaderText(MAIN_HEADER_TEXT.toString());
+        homePage.assertMainHeaderTitle(MAIN_HEADER_TITLE);
+        homePage.assertMainHeaderText(MAIN_HEADER_TEXT);
 
         // 10 Assert that there is the iframe in the center of page
         homePage.assertIframeIsPresent();
@@ -72,10 +66,10 @@ public class HomePageBrowserInteraction extends SeleniumBase {
         homePage.switchBackFromIframe();
 
         // 13 Assert a text of the sub header
-        homePage.assertSubHeaderText(SUB_HEADER_TEXT.toString());
+        homePage.assertSubHeaderText(SUB_HEADER_TEXT);
 
         // 14 Assert that JDI GITHUB is a link and has a proper URL
-        homePage.assertSubHeaderLink(SUB_HEADER_URL.toString());
+        homePage.assertSubHeaderLink(SUB_HEADER_URL);
 
         // 15 Assert that there is Left Section
         homePage.assertLeftSectionIsPresent();

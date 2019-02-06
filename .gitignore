@@ -27,6 +27,3 @@
 
 # virtual machine crash logs, see httpwww.java.comendownloadhelperror_hotspot.xml
 hs_err_pid
-
-# include .idea - is not sufficient?
-*.iml
