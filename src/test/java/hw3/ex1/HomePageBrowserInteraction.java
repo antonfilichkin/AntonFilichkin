@@ -11,6 +11,7 @@ import org.testng.annotations.*;
 import static base.Enums.HomePageData.*;
 import static base.Enums.Users.PITER_CHAILOVSKII;
 
+// TODO Code convention, reformat your code via IDEA
 public class HomePageBrowserInteraction extends SeleniumBase{
     private HomePage homePage;
     private WebDriver driver;
