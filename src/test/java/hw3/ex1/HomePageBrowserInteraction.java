@@ -11,13 +11,12 @@ import org.testng.annotations.*;
 import static base.Enums.HomePageData.*;
 import static base.Enums.Users.PITER_CHAILOVSKII;
 
-// TODO Code convention, reformat your code via IDEA
-public class HomePageBrowserInteraction extends SeleniumBase{
+public class HomePageBrowserInteraction extends SeleniumBase {
     private HomePage homePage;
     private WebDriver driver;
 
     @BeforeMethod
-    public void BeforeMethod(){
+    public void BeforeMethod() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         homePage = PageFactory.initElements(driver, HomePage.class);

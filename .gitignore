@@ -4,12 +4,6 @@
 # Log file
 .log
 
-# BlueJ files
-.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp
-
 # Package Files #
 .jar
 .war
@@ -21,11 +15,10 @@
 
 # Idea
 .idea
+.iml
 
 # Target
 /target
 
-# virtual machine crash logs, see httpwww.java.comendownloadhelperror_hotspot.xml
+# virtual machine crash logs
 hs_err_pid
-
-# TODO You have not ignored .iml file

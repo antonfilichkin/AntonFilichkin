@@ -11,4 +11,3 @@ public abstract class SelenideBase {
         Configuration.pollingInterval = 300;
     }
 }
-
