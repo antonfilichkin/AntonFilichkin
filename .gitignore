@@ -14,11 +14,14 @@
 .rar
 
 # Idea
-.idea
+/idea
 .iml
 
 # Target
 /target
+
+# Build
+/build
 
 # virtual machine crash logs
 hs_err_pid
