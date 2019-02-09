@@ -1,4 +1,4 @@
-package hw4.ex1;
+package hw5.ex2;
 
 import base.SelenideBase;
 import hw4.Enums.SupportDropdownItems;
@@ -11,19 +11,22 @@ import org.testng.annotations.Test;
 import static base.Enums.Users.PITER_CHAILOVSKII;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static hw4.Enums.Colors.*;
-import static hw4.Enums.Elements.*;
-import static hw4.Enums.Metals.*;
+import static hw4.Enums.Colors.YELLOW;
+import static hw4.Enums.Elements.WATER;
+import static hw4.Enums.Elements.WIND;
+import static hw4.Enums.Metals.SELEN;
 import static hw4.Enums.SupportDropdownItems.*;
-import static hw4.Enums.URLs.*;
+import static hw4.Enums.URLs.DATES_PAGE;
+import static hw4.Enums.URLs.DIFFERENT_ELEMENTS_PAGE;
+import static hw4.Enums.URLs.HOME_PAGE;
 
-public class ServicePageInterfaceCheck extends SelenideBase {
+public class ServicePageInterfaceCheckFail extends SelenideBase {
     private HomePage homePage;
     private DifferentElementsPage differentElementsPage;
 
     private final String HomePageURL = HOME_PAGE.getUrl();
 
-    @BeforeMethod(groups = {"JenkinsTest"})
+    @BeforeMethod(groups = {"JenkinsFailTest"})
     public void BeforeMethod() {
         // 1 Open test site by URL
         open(HomePageURL);
@@ -31,15 +34,15 @@ public class ServicePageInterfaceCheck extends SelenideBase {
         getWebDriver().manage().window().maximize(); //Force fullscreen
     }
 
-    @AfterMethod(groups = {"JenkinsTest"})
+    @AfterMethod(groups = {"JenkinsFailTest"})
     public void closeTest() {
         close();
     }
 
-    @Test(groups = {"JenkinsTest"})
+    @Test(groups = {"JenkinsFailTest"})
     public void homePageContentTest() {
         // 2 Assert Browser title
-        homePage.assertBrowserTitle(HOME_PAGE);
+        homePage.assertBrowserTitle(DATES_PAGE);
 
         // 3 Perform login
         homePage.login(PITER_CHAILOVSKII);

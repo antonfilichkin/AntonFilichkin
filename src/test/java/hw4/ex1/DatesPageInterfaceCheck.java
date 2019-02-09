@@ -20,7 +20,7 @@ public class DatesPageInterfaceCheck extends SelenideBase {
 
     private final String HomePageURL = HOME_PAGE.getUrl();
 
-    @BeforeMethod
+    @BeforeMethod(groups = {"JenkinsTest"})
     public void BeforeMethod() {
         // 1 Open test site by URL
         open(HomePageURL);
@@ -28,12 +28,12 @@ public class DatesPageInterfaceCheck extends SelenideBase {
         getWebDriver().manage().window().maximize(); //Force fullscreen
     }
 
-    @AfterMethod
+    @AfterMethod(groups = {"JenkinsTest"})
     public void closeTest() {
         close();
     }
 
-    @Test
+    @Test(groups = {"JenkinsTest"})
     public void homePageContentTest() {
         // 2 Assert Browser title
         homePage.assertBrowserTitle(HOME_PAGE);
