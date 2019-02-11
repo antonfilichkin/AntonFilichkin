@@ -10,7 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertTrue;
@@ -80,6 +82,12 @@ public abstract class BaseNavigation {
         assertElementsContains(headerMenuServiceDropdown.$$("li"), expectedElements);
     }
 
+    /*
+    TODO Basically, PO can return another PO, your approach is not the best.
+         The main idea of it to specify as return type exactly the PO that can be used
+         in further steps, but you specify just base type of your PO inheritance architecture.
+         It this particular home task, it will be better to avoid such a this approach.
+     */
     @SuppressWarnings("unchecked")
     public <Page extends BaseNavigation> Page headerMenuServiceSelect(SupportDropdownItems item) {
         headerMenuServiceDropdown.click();
@@ -105,11 +113,14 @@ public abstract class BaseNavigation {
         for (SupportDropdownItems item : items) {
             expectedElements.add(item.toString());
         }
+        // TODO You have to use Selenide methods here
         assertElementsContains(leftMenuServiceDropdown.$$("li"), expectedElements);
     }
 
     // ----- RIGHT SECTION Methods -----
     public void assertLog(String... expectedLog) {
+        // TODO You cat do it without cycle, take a look on base Selenide conditions,
+        // TODO moreover, it is not really great to find elements here, you can use PO approach.
         ElementsCollection logs = log.$$("li");
         logs.shouldBe(sizeGreaterThanOrEqual(expectedLog.length));
         for (int i = 0; i < expectedLog.length; ++i) {
@@ -119,6 +130,7 @@ public abstract class BaseNavigation {
 
     // ----- COMMON Methods -----
     private static void assertElementsContains(ElementsCollection elements, List<String> expectedElements) {
+        // TODO elements.shouldHave(size(expectedElements.size())).shouldHave(texts(expectedElements));
         List<String> elementsTexts = elements.texts();
         elements.shouldHave(sizeGreaterThanOrEqual(expectedElements.size()));
         assertTrue(elementsTexts.containsAll(expectedElements));

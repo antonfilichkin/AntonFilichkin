@@ -14,7 +14,7 @@
 
         <classes>
             <class name="hw4.ex1.ServicePageInterfaceCheck"/>
-            <class name="hw4.ex1.DatesPageInterfaceCheck"/>
+            <class name="hw4.ex2.DatesPageInterfaceCheck"/>
             <class name="hw5.ex2.ServicePageInterfaceCheckFail"/>
         </classes>
 

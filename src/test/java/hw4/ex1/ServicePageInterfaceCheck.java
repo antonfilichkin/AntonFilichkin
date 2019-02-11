@@ -49,6 +49,7 @@ public class ServicePageInterfaceCheck extends SelenideBase {
 
         // 5 Click on "Service" subcategory in the header and check that drop down contains options
         // "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"	Elements exist
+        // TODO You can use default enum method 'values()'
         SupportDropdownItems[] optionsToCheck = {
                 SUPPORT, DATES, COMPLEX_TABLE, SIMPLE_TABLE, TABLE_WITH_PAGES, DIFFERENT_ELEMENTS};
         homePage.assertTopMenuServiceDropdownElements(optionsToCheck);

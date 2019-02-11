@@ -1,4 +1,4 @@
-package hw4.ex1;
+package hw4.ex2;
 
 import base.SelenideBase;
 import hw4.Pages.DatesPage;

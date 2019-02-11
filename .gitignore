@@ -15,7 +15,8 @@
 
 # Idea
 /.idea
-.iml
+# TODO Pay attention on it
+*.iml
 
 # Target
 /target
