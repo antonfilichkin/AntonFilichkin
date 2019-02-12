@@ -12,7 +12,6 @@ public enum Elements {
         this.text = text;
     }
 
-    // TODO That's really cool. I haven't faced approach like this before.
     public String valueChanged(boolean status) {
         return text + ": condition changed to " + Boolean.toString(status);
     }

@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
@@ -40,6 +39,15 @@ public abstract class BaseNavigation {
     @FindBy(css = ".m-l8 > .dropdown")
     private SelenideElement headerMenuServiceDropdown;
 
+    @FindBy(css = ".m-l8 > .dropdown li")
+    private ElementsCollection headerMenuServiceDropdownItems;
+
+    @FindBy(css = ".m-l8  a[href^='different']")
+    private SelenideElement HeaderMenuServiceDropdownDifferentElements;
+
+    @FindBy(css = ".m-l8  a[href^='dates']")
+    private SelenideElement HeaderMenuServiceDropdownDates;
+
     // ----- FOOTER -----
     @FindBy(css = ".footer-bg")
     private SelenideElement footer;
@@ -51,9 +59,15 @@ public abstract class BaseNavigation {
     @FindBy(css = ".sidebar-menu > [index='3']")
     private SelenideElement leftMenuServiceDropdown;
 
+    @FindBy(css = ".sidebar-menu > [index='3'] li")
+    private ElementsCollection leftMenuServiceDropdownItems;
+
     // ----- RIGHT Section -----
     @FindBy(css = ".logs")
     private SelenideElement log;
+
+    @FindBy(css = ".logs > li")
+    private ElementsCollection logs;
 
     // ===== METHODS =====
     public void assertBrowserTitle(URLs title) {
@@ -74,32 +88,24 @@ public abstract class BaseNavigation {
     }
 
     public void assertTopMenuServiceDropdownElements(SupportDropdownItems... items) {
-        headerMenuServiceDropdown.click();
         List<String> expectedElements = new ArrayList<>();
         for (SupportDropdownItems item : items) {
             expectedElements.add(item.toString().toUpperCase());
         }
-        assertElementsContains(headerMenuServiceDropdown.$$("li"), expectedElements);
+        headerMenuServiceDropdown.click();
+        headerMenuServiceDropdownItems.shouldHave(texts(expectedElements));
     }
 
-    /*
-    TODO Basically, PO can return another PO, your approach is not the best.
-         The main idea of it to specify as return type exactly the PO that can be used
-         in further steps, but you specify just base type of your PO inheritance architecture.
-         It this particular home task, it will be better to avoid such a this approach.
-     */
-    @SuppressWarnings("unchecked")
-    public <Page extends BaseNavigation> Page headerMenuServiceSelect(SupportDropdownItems item) {
+    public DifferentElementsPage headerMenuServiceSelectDifferentElements() {
         headerMenuServiceDropdown.click();
-        headerMenuServiceDropdown.$$("li").get(item.ordinal()).click();
-        switch (item) {
-            case DIFFERENT_ELEMENTS:
-                return (Page) page(DifferentElementsPage.class);
-            case DATES:
-                return (Page) page(DatesPage.class);
-            default:
-                return (Page) page(HomePage.class);
-        }
+        HeaderMenuServiceDropdownDifferentElements.click();
+        return page(DifferentElementsPage.class);
+    }
+
+    public DatesPage headerMenuServiceSelectDates() {
+        headerMenuServiceDropdown.click();
+        HeaderMenuServiceDropdownDates.click();
+        return page(DatesPage.class);
     }
 
     // ----- LEFT MENU Methods -----
@@ -108,29 +114,23 @@ public abstract class BaseNavigation {
     }
 
     public void assertLeftSectionServiceDropdown(SupportDropdownItems... items) {
-        leftMenuServiceDropdown.click();
         List<String> expectedElements = new ArrayList<>();
         for (SupportDropdownItems item : items) {
             expectedElements.add(item.toString());
         }
-        // TODO You have to use Selenide methods here
-        assertElementsContains(leftMenuServiceDropdown.$$("li"), expectedElements);
+        leftMenuServiceDropdown.click();
+        leftMenuServiceDropdownItems.shouldHave(texts(expectedElements));
     }
 
     // ----- RIGHT SECTION Methods -----
     public void assertLog(String... expectedLog) {
-        // TODO You cat do it without cycle, take a look on base Selenide conditions,
-        // TODO moreover, it is not really great to find elements here, you can use PO approach.
-        ElementsCollection logs = log.$$("li");
-        logs.shouldBe(sizeGreaterThanOrEqual(expectedLog.length));
-        for (int i = 0; i < expectedLog.length; ++i) {
-            logs.get(i).shouldHave(text(expectedLog[i]));
-        }
+        logs.first(expectedLog.length).shouldHave(texts(expectedLog));
     }
 
     // ----- COMMON Methods -----
     private static void assertElementsContains(ElementsCollection elements, List<String> expectedElements) {
-        // TODO elements.shouldHave(size(expectedElements.size())).shouldHave(texts(expectedElements));
+        // This supplementary method was intended to check if only a part of interface matches expected values
+        // Has not found this type of Condition in Selenide
         List<String> elementsTexts = elements.texts();
         elements.shouldHave(sizeGreaterThanOrEqual(expectedElements.size()));
         assertTrue(elementsTexts.containsAll(expectedElements));

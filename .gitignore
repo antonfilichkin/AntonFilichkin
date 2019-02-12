@@ -15,7 +15,6 @@
 
 # Idea
 /.idea
-# TODO Pay attention on it
 *.iml
 
 # Target
@@ -23,6 +22,9 @@
 
 # Build
 /build
+
+# Allure
+/.allure
 
 # virtual machine crash logs
 hs_err_pid

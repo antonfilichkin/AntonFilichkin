@@ -11,7 +11,6 @@ import static base.Enums.Users.PITER_CHAILOVSKII;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static hw4.Enums.Range2SliderThumbs.*;
-import static hw4.Enums.SupportDropdownItems.*;
 import static hw4.Enums.URLs.*;
 
 public class DatesPageInterfaceCheck extends SelenideBase {
@@ -45,13 +44,12 @@ public class DatesPageInterfaceCheck extends SelenideBase {
         homePage.assertUserName(PITER_CHAILOVSKII);
 
         // 5 Open through the header menu Service -> Dates Page
-        datesPage = homePage.headerMenuServiceSelect(DATES);
+        datesPage = homePage.headerMenuServiceSelectDates();
         datesPage.assertBrowserTitle(DATES_PAGE);
 
         // 6 Using drag-and-drop set Range sliders.
         // left sliders - the most left position, right slider - the most right position.
-        datesPage.setRange2Handle(FROM, 0);
-        datesPage.setRange2Handle(TO, 100);
+        datesPage.setRange2Handles(0, 100);
 
         // 7 Assert that for "From" and "To" sliders there are logs rows with corresponding values
         // There are 2 rows for "From" and "To" sliders with corresponding values
@@ -59,26 +57,23 @@ public class DatesPageInterfaceCheck extends SelenideBase {
 
         // 8 Using drag-and-drop set Range sliders.
         // left sliders - the most left position, right slider - the most left position.
-        datesPage.setRange2Handle(FROM, 0);
-        datesPage.setRange2Handle(TO, 0);
+        datesPage.setRange2Handles(0,0);
 
         // 9 Assert that for "From" and "To" sliders there are logs rows with corresponding values
         datesPage.assertLog(TO.valueChanged(0), FROM.valueChanged(0));
 
         //10 Using drag-and-drop set Range sliders.
-        // left sliders - the most rigth position, right slider - the most right position.
-        datesPage.setRange2Handle(TO, 100);
-        datesPage.setRange2Handle(FROM, 100);
+        // left sliders - the most right position, right slider - the most right position.
+        datesPage.setRange2Handles(100, 100);
 
         //11 Assert that for "From" and "To" sliders there are logs rows with corresponding values
         datesPage.assertLog(FROM.valueChanged(100), TO.valueChanged(100));
 
         //12 Using drag-and-drop set Range sliders.	From = 30, To = 70
-        datesPage.setRange2Handle(FROM, 30);
+        datesPage.setRange2Handles(30,70);
         // BUG - Dragging "From" slider from the same place as "To" slider - logs as "To" slider position.
         // Repeating step for correct log message
-        datesPage.setRange2Handle(FROM, 30);
-        datesPage.setRange2Handle(TO, 70);
+        datesPage.setRange2Handles(30, 70);
 
         //13 Assert that for "From" and "To" sliders there are logs rows with corresponding values
         datesPage.assertLog(TO.valueChanged(70), FROM.valueChanged(30));

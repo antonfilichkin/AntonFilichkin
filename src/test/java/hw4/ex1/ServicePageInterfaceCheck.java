@@ -14,7 +14,6 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static hw4.Enums.Colors.*;
 import static hw4.Enums.Elements.*;
 import static hw4.Enums.Metals.*;
-import static hw4.Enums.SupportDropdownItems.*;
 import static hw4.Enums.URLs.*;
 
 public class ServicePageInterfaceCheck extends SelenideBase {
@@ -23,7 +22,7 @@ public class ServicePageInterfaceCheck extends SelenideBase {
 
     private final String HomePageURL = HOME_PAGE.getUrl();
 
-    @BeforeMethod(groups = {"JenkinsTest"})
+    @BeforeMethod
     public void BeforeMethod() {
         // 1 Open test site by URL
         open(HomePageURL);
@@ -31,12 +30,12 @@ public class ServicePageInterfaceCheck extends SelenideBase {
         getWebDriver().manage().window().maximize(); //Force fullscreen
     }
 
-    @AfterMethod(groups = {"JenkinsTest"})
+    @AfterMethod
     public void closeTest() {
         close();
     }
 
-    @Test(groups = {"JenkinsTest"})
+    @Test
     public void homePageContentTest() {
         // 2 Assert Browser title
         homePage.assertBrowserTitle(HOME_PAGE);
@@ -49,17 +48,16 @@ public class ServicePageInterfaceCheck extends SelenideBase {
 
         // 5 Click on "Service" subcategory in the header and check that drop down contains options
         // "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"	Elements exist
-        // TODO You can use default enum method 'values()'
-        SupportDropdownItems[] optionsToCheck = {
-                SUPPORT, DATES, COMPLEX_TABLE, SIMPLE_TABLE, TABLE_WITH_PAGES, DIFFERENT_ELEMENTS};
-        homePage.assertTopMenuServiceDropdownElements(optionsToCheck);
+        // There are 8 elements in menu and in enum, and we have to check for only 6 of them,
+        // my assumption was - what if it is dynamically created menu, and we have to check only for these 6?
+        homePage.assertTopMenuServiceDropdownElements(SupportDropdownItems.values());
 
         // 6 Click on Service subcategory in the left section and check that drop down contains options
         // 	"Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements" Elements exist
-        homePage.assertLeftSectionServiceDropdown(optionsToCheck);
+        homePage.assertLeftSectionServiceDropdown(SupportDropdownItems.values());
 
         // 7 Open through the header menu Service -> Different Elements Page
-        differentElementsPage = homePage.headerMenuServiceSelect(DIFFERENT_ELEMENTS);
+        differentElementsPage = homePage.headerMenuServiceSelectDifferentElements();
         differentElementsPage.assertBrowserTitle(DIFFERENT_ELEMENTS_PAGE);
 
         // 8 Check interface on Different elements page, it contains all needed elements
