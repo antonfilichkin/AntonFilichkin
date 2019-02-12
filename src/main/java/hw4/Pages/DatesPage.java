@@ -15,6 +15,7 @@ public class DatesPage extends BaseNavigation {
     @FindBy(css = ".ui-slider-handle")
     private ElementsCollection range2SliderThumbs;
 
+    // TODO It will be better with method that can get 2 variables : from and to
     public void setRange2Handle(Range2SliderThumbs thumb, int desiredValue) {
         int xOffset = calculateThumbXOffset(range2Slider, range2SliderThumbs.get(thumb.ordinal()), desiredValue);
         Selenide.actions().dragAndDropBy(range2SliderThumbs.get(thumb.ordinal()), xOffset, 0).perform();
