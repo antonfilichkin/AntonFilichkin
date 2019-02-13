@@ -4,8 +4,12 @@ import base.SelenideBase;
 import hw4.Enums.SupportDropdownItems;
 import hw4.Pages.DifferentElementsPage;
 import hw4.Pages.HomePage;
+import hw5.Listeners.AllureAttachmentListener;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static base.Enums.Users.PITER_CHAILOVSKII;
@@ -18,6 +22,9 @@ import static hw4.Enums.Metals.SELEN;
 import static hw4.Enums.URLs.DIFFERENT_ELEMENTS_PAGE;
 import static hw4.Enums.URLs.HOME_PAGE;
 
+@Feature("Jenkins tests")
+@Story("Service Page Interface Testing (Fail)")
+@Listeners(AllureAttachmentListener.class)
 public class ServicePageInterfaceCheckFail extends SelenideBase {
     private HomePage homePage;
     private DifferentElementsPage differentElementsPage;

@@ -3,8 +3,12 @@ package hw5.ex1;
 import base.SelenideBase;
 import hw4.Pages.DatesPage;
 import hw4.Pages.HomePage;
+import hw5.Listeners.AllureAttachmentListener;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static base.Enums.Users.PITER_CHAILOVSKII;
@@ -15,6 +19,9 @@ import static hw4.Enums.Range2SliderThumbs.TO;
 import static hw4.Enums.URLs.DATES_PAGE;
 import static hw4.Enums.URLs.HOME_PAGE;
 
+@Feature("Jenkins tests")
+@Story("Dates Page Interface Testing")
+@Listeners(AllureAttachmentListener.class)
 public class DatesPageInterfaceCheck extends SelenideBase {
     private HomePage homePage;
     private DatesPage datesPage;
@@ -36,7 +43,7 @@ public class DatesPageInterfaceCheck extends SelenideBase {
 
     @Test(groups = {"JenkinsTest"})
     public void homePageContentTest() {
-        // 2 Assert Browser title
+        //2 Assert Browser title
         homePage.assertBrowserTitle(HOME_PAGE);
 
         // 3 Perform login
