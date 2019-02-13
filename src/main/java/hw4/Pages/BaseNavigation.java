@@ -10,11 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.page;
-import static org.testng.Assert.assertTrue;
 
 public abstract class BaseNavigation {
     @FindBy(css = "title")
@@ -128,11 +126,11 @@ public abstract class BaseNavigation {
     }
 
     // ----- COMMON Methods -----
-    private static void assertElementsContains(ElementsCollection elements, List<String> expectedElements) {
-        // This supplementary method was intended to check if only a part of interface matches expected values
-        // Has not found this type of Condition in Selenide
-        List<String> elementsTexts = elements.texts();
-        elements.shouldHave(sizeGreaterThanOrEqual(expectedElements.size()));
-        assertTrue(elementsTexts.containsAll(expectedElements));
-    }
+//    private static void assertElementsContains(ElementsCollection elements, List<String> expectedElements) {
+//        // This supplementary method was intended to check if only a part of interface matches expected values
+//        // Has not found this type of Condition in Selenide
+//        List<String> elementsTexts = elements.texts();
+//        elements.shouldHave(sizeGreaterThanOrEqual(expectedElements.size()));
+//        assertTrue(elementsTexts.containsAll(expectedElements));
+//    }
 }

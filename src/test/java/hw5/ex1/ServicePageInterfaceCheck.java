@@ -1,4 +1,4 @@
-//package hw5.ex2;
+//package hw5.ex1;
 //
 //import base.SelenideBase;
 //import hw4.Enums.SupportDropdownItems;
@@ -16,17 +16,16 @@
 //import static hw4.Enums.Elements.WIND;
 //import static hw4.Enums.Metals.SELEN;
 //import static hw4.Enums.SupportDropdownItems.*;
-//import static hw4.Enums.URLs.DATES_PAGE;
 //import static hw4.Enums.URLs.DIFFERENT_ELEMENTS_PAGE;
 //import static hw4.Enums.URLs.HOME_PAGE;
 //
-//public class ServicePageInterfaceCheckFail extends SelenideBase {
+//public class ServicePageInterfaceCheck extends SelenideBase {
 //    private HomePage homePage;
 //    private DifferentElementsPage differentElementsPage;
 //
 //    private final String HomePageURL = HOME_PAGE.getUrl();
 //
-//    @BeforeMethod(groups = {"JenkinsFailTest"})
+//    @BeforeMethod(groups = {"JenkinsTest"})
 //    public void BeforeMethod() {
 //        // 1 Open test site by URL
 //        open(HomePageURL);
@@ -34,12 +33,12 @@
 //        getWebDriver().manage().window().maximize(); //Force fullscreen
 //    }
 //
-//    @AfterMethod(groups = {"JenkinsFailTest"})
+//    @AfterMethod(groups = {"JenkinsTest"})
 //    public void closeTest() {
 //        close();
 //    }
 //
-//    @Test(groups = {"JenkinsFailTest"})
+//    @Test(groups = {"JenkinsTest"})
 //    public void homePageContentTest() {
 //        // 2 Assert Browser title
 //        homePage.assertBrowserTitle(HOME_PAGE);

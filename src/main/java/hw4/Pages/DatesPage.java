@@ -6,8 +6,6 @@ import com.codeborne.selenide.SelenideElement;
 import hw4.Enums.Range2SliderThumbs;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 import static hw4.Enums.Range2SliderThumbs.FROM;
 import static hw4.Enums.Range2SliderThumbs.TO;
 import static hw4.Utils.Utils.calculateThumbXOffset;
