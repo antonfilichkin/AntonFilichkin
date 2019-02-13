@@ -1,9 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestNg Suite" parallel="methods" thread-count="3">
-
     <test name="hw5.ex2.JenkinsTests">
-
         <groups>
             <run>
                 <include name="Config"/>
@@ -13,11 +11,9 @@
         </groups>
 
         <classes>
-            <class name="hw4.ex1.ServicePageInterfaceCheck"/>
-            <class name="hw4.ex2.DatesPageInterfaceCheck"/>
+            <class name="hw5.ex1.ServicePageInterfaceCheck"/>
+            <class name="hw5.ex1.DatesPageInterfaceCheck"/>
             <class name="hw5.ex2.ServicePageInterfaceCheckFail"/>
         </classes>
-
     </test>
-
 </suite>
