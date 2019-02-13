@@ -1,8 +1,8 @@
 package hw5.ex1;
 
 import base.SelenideBase;
-import hw4.Pages.DatesPage;
-import hw4.Pages.HomePage;
+import hw5.Pages.DatesPage;
+import hw5.Pages.HomePage;
 import hw5.Listeners.AllureAttachmentListener;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;

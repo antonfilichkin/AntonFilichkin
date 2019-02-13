@@ -2,8 +2,8 @@ package hw5.ex1;
 
 import base.SelenideBase;
 import hw4.Enums.SupportDropdownItems;
-import hw4.Pages.DifferentElementsPage;
-import hw4.Pages.HomePage;
+import hw5.Pages.DifferentElementsPage;
+import hw5.Pages.HomePage;
 import hw5.Listeners.AllureAttachmentListener;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;

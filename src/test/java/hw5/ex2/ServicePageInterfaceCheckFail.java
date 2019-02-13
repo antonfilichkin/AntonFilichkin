@@ -2,8 +2,8 @@ package hw5.ex2;
 
 import base.SelenideBase;
 import hw4.Enums.SupportDropdownItems;
-import hw4.Pages.DifferentElementsPage;
-import hw4.Pages.HomePage;
+import hw5.Pages.DifferentElementsPage;
+import hw5.Pages.HomePage;
 import hw5.Listeners.AllureAttachmentListener;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -83,7 +83,7 @@ public class ServicePageInterfaceCheckFail extends SelenideBase {
         differentElementsPage.selectCheckboxes(WATER, WIND);
 
         //12 Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.
-        differentElementsPage.assertLog(WIND.valueChanged(false), WATER.valueChanged(true));
+        differentElementsPage.assertLog(WIND.valueChanged(true), WATER.valueChanged(true));
 
         //13 Select radio Selen Element
         differentElementsPage.selectRadioButtons(SELEN);
