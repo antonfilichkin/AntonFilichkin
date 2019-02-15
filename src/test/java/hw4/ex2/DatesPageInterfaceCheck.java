@@ -1,17 +1,18 @@
 package hw4.ex2;
 
 import base.SelenideBase;
-import hw4.Pages.DatesPage;
-import hw4.Pages.HomePage;
+import pages.hw4.DatesPage;
+import pages.hw4.HomePage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static base.Enums.Users.PITER_CHAILOVSKII;
+import static enums.Users.PITER_CHAILOVSKII;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static hw4.Enums.Range2SliderThumbs.*;
-import static hw4.Enums.URLs.*;
+import static enums.Range2SliderThumbs.*;
+import static enums.ServiceDropdownItems.DATES;
+import static enums.URLs.*;
 
 public class DatesPageInterfaceCheck extends SelenideBase {
     private HomePage homePage;
@@ -24,6 +25,7 @@ public class DatesPageInterfaceCheck extends SelenideBase {
         // 1 Open test site by URL
         open(HomePageURL);
         homePage = page(HomePage.class);
+        datesPage = page(DatesPage.class);
         getWebDriver().manage().window().maximize(); //Force fullscreen
     }
 
@@ -44,7 +46,7 @@ public class DatesPageInterfaceCheck extends SelenideBase {
         homePage.assertUserName(PITER_CHAILOVSKII);
 
         // 5 Open through the header menu Service -> Dates Page
-        datesPage = homePage.headerMenuServiceSelectDates();
+        homePage.headerMenuServiceSelect(DATES);
         datesPage.assertBrowserTitle(DATES_PAGE);
 
         // 6 Using drag-and-drop set Range sliders.

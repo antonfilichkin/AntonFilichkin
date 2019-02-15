@@ -1,15 +1,16 @@
 package hw3.ex1;
 
-import base.Enums.Benefits;
-import base.Enums.TopMenuItems;
+import enums.Benefits;
+import enums.TopMenuItems;
 import base.SeleniumBase;
+import pages.hw3.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.*;
 
-import static base.Enums.HomePageData.*;
-import static base.Enums.Users.PITER_CHAILOVSKII;
+import static enums.HomePageData.*;
+import static enums.Users.PITER_CHAILOVSKII;
 
 public class HomePageBrowserInteraction extends SeleniumBase {
     private HomePage homePage;

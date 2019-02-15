@@ -1,7 +1,7 @@
 package hw2.ex3;
 
-import base.Enums.Benefits;
-import base.Enums.TopMenuItems;
+import enums.Benefits;
+import enums.TopMenuItems;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,9 +10,9 @@ import org.testng.annotations.*;
 
 import java.util.List;
 
-import static base.Enums.HomePageData.*;
-import static base.Enums.HomePageSelectors.*;
-import static base.Enums.Users.*;
+import static enums.HomePageData.*;
+import static enums.HomePageSelectors.*;
+import static enums.Users.*;
 import static java.lang.System.setProperty;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -74,7 +74,7 @@ public class testSiteBrowserInteractionAnnotations {
         assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int expected_items = TopMenuItems.getSize();
+        int expected_items = TopMenuItems.values().length;
         List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
         assertEquals(topMenuItemsActual.size(), expected_items);
 

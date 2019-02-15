@@ -1,7 +1,7 @@
 package hw2.ex2;
 
-import base.Enums.Benefits;
-import base.Enums.TopMenuItems;
+import enums.Benefits;
+import enums.TopMenuItems;
 import base.SeleniumBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,9 +11,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static base.Enums.HomePageData.*;
-import static base.Enums.HomePageSelectors.*;
-import static base.Enums.Users.*;
+import static enums.HomePageData.*;
+import static enums.HomePageSelectors.*;
+import static enums.Users.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -44,7 +44,7 @@ public class testSiteBrowserInteractionSmokeTest extends SeleniumBase {
         assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int expected_items = TopMenuItems.getSize();
+        int expected_items = TopMenuItems.values().length;
         List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
         assertEquals(topMenuItemsActual.size(), expected_items);
 
@@ -128,7 +128,7 @@ public class testSiteBrowserInteractionSmokeTest extends SeleniumBase {
         assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int expected_items = TopMenuItems.getSize();
+        int expected_items = TopMenuItems.values().length;
         List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
         assertEquals(topMenuItemsActual.size(), expected_items);
 
@@ -212,7 +212,7 @@ public class testSiteBrowserInteractionSmokeTest extends SeleniumBase {
         assertEquals(driver.getTitle(), TEST_PAGE_TITLE.toString());
 
         // 6 Assert that there are 4 items on the header section are displayed and they have proper texts
-        int expected_items = TopMenuItems.getSize();
+        int expected_items = TopMenuItems.values().length;
         List<WebElement> topMenuItemsActual = driver.findElements(By.cssSelector(NAVBAR_ELEMENTS_CSS.toString()));
         assertEquals(topMenuItemsActual.size(), expected_items);
 

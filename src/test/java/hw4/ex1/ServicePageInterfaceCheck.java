@@ -1,20 +1,21 @@
 package hw4.ex1;
 
 import base.SelenideBase;
-import hw4.Enums.SupportDropdownItems;
-import hw4.Pages.DifferentElementsPage;
-import hw4.Pages.HomePage;
+import enums.ServiceDropdownItems;
+import pages.hw4.DifferentElementsPage;
+import pages.hw4.HomePage;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static base.Enums.Users.PITER_CHAILOVSKII;
+import static enums.Users.PITER_CHAILOVSKII;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static hw4.Enums.Colors.*;
-import static hw4.Enums.Elements.*;
-import static hw4.Enums.Metals.*;
-import static hw4.Enums.URLs.*;
+import static enums.Colors.*;
+import static enums.Elements.*;
+import static enums.Metals.*;
+import static enums.ServiceDropdownItems.DIFFERENT_ELEMENTS;
+import static enums.URLs.*;
 
 public class ServicePageInterfaceCheck extends SelenideBase {
     private HomePage homePage;
@@ -27,6 +28,7 @@ public class ServicePageInterfaceCheck extends SelenideBase {
         // 1 Open test site by URL
         open(HomePageURL);
         homePage = page(HomePage.class);
+        differentElementsPage = page(DifferentElementsPage.class);
         getWebDriver().manage().window().maximize(); //Force fullscreen
     }
 
@@ -47,17 +49,17 @@ public class ServicePageInterfaceCheck extends SelenideBase {
         homePage.assertUserName(PITER_CHAILOVSKII);
 
         // 5 Click on "Service" subcategory in the header and check that drop down contains options
-        // "Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements"	Elements exist
+        // "Support, Dates, Complex Table, Simple Table, Tables With pages, Different Elements"	Elements exist
         // There are 8 elements in menu and in enum, and we have to check for only 6 of them,
         // my assumption was - what if it is dynamically created menu, and we have to check only for these 6?
-        homePage.assertTopMenuServiceDropdownElements(SupportDropdownItems.values());
+        homePage.assertTopMenuServiceDropdownElements(ServiceDropdownItems.values());
 
         // 6 Click on Service subcategory in the left section and check that drop down contains options
-        // 	"Support, Dates, Complex Table, Simple Table, Tables With Pages, Different Elements" Elements exist
-        homePage.assertLeftSectionServiceDropdown(SupportDropdownItems.values());
+        // 	"Support, Dates, Complex Table, Simple Table, Tables With pages, Different Elements" Elements exist
+        homePage.assertLeftSectionServiceDropdown(ServiceDropdownItems.values());
 
         // 7 Open through the header menu Service -> Different Elements Page
-        differentElementsPage = homePage.headerMenuServiceSelectDifferentElements();
+        homePage.headerMenuServiceSelect(DIFFERENT_ELEMENTS);
         differentElementsPage.assertBrowserTitle(DIFFERENT_ELEMENTS_PAGE);
 
         // 8 Check interface on Different elements page, it contains all needed elements

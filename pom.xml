@@ -19,6 +19,7 @@
         <allure-maven.version>2.10.0</allure-maven.version>
         <aspectj.version>1.9.2</aspectj.version>
         <cucumber.version>1.2.5</cucumber.version>
+        <slf4j-simple.version>1.7.25</slf4j-simple.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -54,13 +55,18 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-testng</artifactId>
             <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
