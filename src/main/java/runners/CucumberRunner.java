@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeSuite;
 )
 
 public class CucumberRunner extends AbstractTestNGCucumberTests {
-    @BeforeSuite(groups = {"Config"})
+    @BeforeSuite
     public void beforeSuite() {
         Configuration.startMaximized = true;
         Configuration.timeout = 5000;

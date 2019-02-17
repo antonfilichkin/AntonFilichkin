@@ -1,6 +1,5 @@
 package hw6.steps.userTablePage;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.When;
 import enums.UserTablePageTableValues;
 import pages.hw6.UserTablePage;
