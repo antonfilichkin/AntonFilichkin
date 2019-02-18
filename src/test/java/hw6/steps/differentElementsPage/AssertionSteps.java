@@ -9,46 +9,50 @@ import pages.hw6.DifferentElementsPage;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.page;
+
 public class AssertionSteps {
+    private DifferentElementsPage differentElementsPage = page(DifferentElementsPage.class);
+    
     @Then("^Page \"([^\"]*)\" is opened$")
     public void pagePageIsOpened(URLs url){
-        new DifferentElementsPage().assertBrowserTitle(url);
+        differentElementsPage.assertBrowserTitle(url);
     }
 
     @Then("^Different elements page contains all needed elements$")
     public void differentElementsPageContainsAllNeededElements() {
-        new DifferentElementsPage().checkInterface();
+        differentElementsPage.checkInterface();
     }
 
     @Then("^Right section is displayed$")
     public void rightSectionIsDisplayed() {
-        new DifferentElementsPage().assertRightSectionIsPresent();
+        differentElementsPage.assertRightSectionIsPresent();
     }
 
     @Then("^Left section is displayed$")
     public void thenLeftSectionIsDisplayed() {
-        new DifferentElementsPage().assertLeftSectionIsPresent();
+        differentElementsPage.assertLeftSectionIsPresent();
     }
 
     @Then("^Checkboxes \"([^\"]*)\" are .*checked \\(\"([^\"]*)\"\\)$")
     public void elementsAreChecked(List<Elements> options, boolean status){
         Elements[] items = options.toArray(new Elements[0]);
-        new DifferentElementsPage().assertCheckboxesStatus(items, status);
+        differentElementsPage.assertCheckboxesStatus(items, status);
     }
 
     @Then("^There is an individual log for elements:$")
     public void thereIsAnIndividualLogRowAndValueForEachSelectedCheckbox(List<String> logs) {
         String[] logsArray = logs.toArray(new String[0]);
-        new DifferentElementsPage().assertLog(logsArray);
+        differentElementsPage.assertLog(logsArray);
     }
 
     @Then("^Metal \"([^\"]*)\" is checked \\(\"([^\"]*)\"\\)$")
     public void elementIsChecked(Metals metal, boolean status) {
-        new DifferentElementsPage().assertRadioButton(metal, status);
+        differentElementsPage.assertRadioButton(metal, status);
     }
 
     @Then("^Color \"([^\"]*)\" is selected$")
     public void elementIsSelected(Colors color) {
-        new DifferentElementsPage().selectDropdown(color);
+        differentElementsPage.selectDropdown(color);
     }
 }

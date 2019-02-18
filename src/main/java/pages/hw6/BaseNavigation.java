@@ -74,9 +74,9 @@ public abstract class BaseNavigation {
     @FindBy(css = ".logs > li")
     private ElementsCollection logs;
 
-    public BaseNavigation() {
-        page(this);
-    }
+//    public BaseNavigation() {
+//        page(this);
+//    }
 
     // ===== METHODS =====
     public void assertBrowserTitle(URLs title) {

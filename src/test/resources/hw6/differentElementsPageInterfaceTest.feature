@@ -3,7 +3,7 @@ Feature: Different Elements Page Test
   Test sequence to assert Different Elements page interface functioning as expected.
 
   Scenario: Login and verify interface functioning as expected
-    When I open test site by URL "HOME_PAGE"
+    Given I am on "HOME_PAGE"
     Then Browser title is "HOME_PAGE"
 
     When I login as user "Piter Chailovskii"

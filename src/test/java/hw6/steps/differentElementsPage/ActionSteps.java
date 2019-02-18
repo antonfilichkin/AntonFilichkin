@@ -8,20 +8,24 @@ import pages.hw6.DifferentElementsPage;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.page;
+
 public class ActionSteps {
+    private DifferentElementsPage differentElementsPage = page(DifferentElementsPage.class);
+
     @When("^I set checkboxes \"([^\"]*)\" to \"(true|false)\"$")
     public void iSetCheckboxes(List<Elements> options, boolean status){
         Elements[] items = options.toArray(new Elements[0]);
-        new DifferentElementsPage().setCheckboxes(items, status);
+        differentElementsPage.setCheckboxes(items, status);
     }
 
     @When("^I select radio	\"([^\"]*)\"$")
     public void iSelectRadio(Metals metal){
-        new DifferentElementsPage().selectRadioButtons(metal);
+        differentElementsPage.selectRadioButtons(metal);
     }
 
     @When("^I select in dropdown \"([^\"]*)\"$")
     public void iSelectInDropdown(Colors color){
-        new DifferentElementsPage().selectDropdown(color);
+        differentElementsPage.selectDropdown(color);
     }
 }

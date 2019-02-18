@@ -5,35 +5,38 @@ import cucumber.api.java.en.Then;
 import enums.URLs;
 import enums.UserTablePageElements;
 import enums.UserTablePageTableValues;
-import pages.hw6.HomePage;
 import pages.hw6.UserTablePage;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Selenide.page;
+
 public class AssertionSteps {
+    private UserTablePage userTablePage = page(UserTablePage.class);
+
     @Then("^\"([^\"]*)\" is opened$")
     public void browserTitleIs(URLs url) {
-        new HomePage().assertBrowserTitle(url);
+        userTablePage.assertBrowserTitle(url);
     }
 
     @Then("^(\\d+) \"([^\"]*)\" .*are displayed on Users Table on User Table Page$")
     public void areDisplayedOnUsersTableOnUserTablePage(int quantity, UserTablePageElements element) {
-        new UserTablePage().checkInterface(element, quantity);
+        userTablePage.checkInterface(element, quantity);
     }
 
     @Then("^User table contains following values:$")
     public void userTableContainsFollowingValues(DataTable values) {
-        new UserTablePage().assertTableContents(values.raw());
+        userTablePage.assertTableContents(values.raw());
     }
 
     @Then("^1 log row has \"([^\"]*)\" text in log section$")
     public void logRowHasTextInLogSection(String message) {
-        new UserTablePage().assertLog(message);
+        userTablePage.assertLog(message);
     }
 
     @Then("^\"([^\"]*)\"s droplist contains values$")
     public void droplistContainsValues(UserTablePageTableValues name, List<String> texts) {
-        new UserTablePage().dropdownContains(name, texts);
+        userTablePage.dropdownContains(name, texts);
     }
 }
 
