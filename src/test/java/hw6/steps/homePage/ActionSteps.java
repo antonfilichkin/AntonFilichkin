@@ -6,6 +6,8 @@ import enums.TopMenuItems;
 import enums.Users;
 import pages.hw6.HomePage;
 
+// TODO In general, this is not the best approach to create new page in each step
+// TODO Take a look on cucumber hooks
 public class ActionSteps {
     @When("^I login as user \"([^\"]*)\"$")
     public void iLoginAsUser(String name) {
