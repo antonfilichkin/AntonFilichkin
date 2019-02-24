@@ -29,6 +29,11 @@ public class AssertionSteps {
         userTablePage.assertTableContents(values.raw());
     }
 
+//    @Then("^User table contains following values:$")
+//    public void userTableContainsFollowingValues(List<SuperHero> superHeroes) {
+//        userTablePage.assertTableContents(superHeroes);
+//    }
+
     @Then("^1 log row has \"([^\"]*)\" text in log section$")
     public void logRowHasTextInLogSection(String message) {
         userTablePage.assertLog(message);
