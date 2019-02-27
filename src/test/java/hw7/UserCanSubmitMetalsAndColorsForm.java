@@ -47,13 +47,12 @@ public class UserCanSubmitMetalsAndColorsForm {
         JDISite.metalsAndColorsPage.title().check();
 
         // 3 Fill form Metals & Colors
-        JDISite.metalsAndColorsPage.elementsForm.submit(
-                new Elements(3, 8, new NatureElements[]{WIND, EARTH},
-                        RED, SELEN, new Vegetables[]{CUCUMBER, TOMATO})
-        );
+        Elements elements =
+                new Elements(3, 8, new NatureElements[]{WIND, EARTH}, RED, SELEN, new Vegetables[]{CUCUMBER, TOMATO});
+        JDISite.metalsAndColorsPage.elementsForm.submit(elements);
 
         // 4 Check results sections
 //        JDISite.metalsAndColorsPage.logSidebar.checkLog();
-        JDISite.metalsAndColorsPage.logSidebar.checkResults();
+        JDISite.metalsAndColorsPage.logSidebar.checkResults(elements);
     }
 }

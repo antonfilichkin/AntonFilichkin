@@ -1,20 +1,31 @@
 package hw7.sections;
 
+import com.epam.jdi.light.elements.complex.JList;
+import com.epam.jdi.light.elements.complex.WebList;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import com.epam.jdi.light.ui.html.complex.DataList;
+import hw7.entities.Elements;
+import org.openqa.selenium.WebElement;
 
-public class LogSidebar {
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+
+public class LogSidebar extends WebPage {
     @Css(".logs")
-    DataList logs;
+    WebList logs;
 
     @Css(".results")
-    DataList results;
+    WebList results;
 
-    public void checkLog(String... expectedLog) {
-        System.out.println();
-    }
+    public void checkResults(Elements elements){
+        Map<String,String> logValues = new HashMap<>();
+        for (WebElement webElement : results) {
+            logValues.put(webElement.getAttribute("class"), webElement.getText());
+        }
 
-    public void checkResults(){
-        System.out.println("f");
+        assertThat(results.get(1).getValue(), is(""));
     }
 }
