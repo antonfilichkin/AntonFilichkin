@@ -2,7 +2,7 @@ package hw6.steps.differentElementsPage;
 
 import cucumber.api.java.en.When;
 import enums.Colors;
-import enums.Elements;
+import enums.NatureElements;
 import enums.Metals;
 import pages.hw6.DifferentElementsPage;
 
@@ -14,8 +14,8 @@ public class ActionSteps {
     private DifferentElementsPage differentElementsPage = page(DifferentElementsPage.class);
 
     @When("^I set checkboxes \"([^\"]*)\" to \"(true|false)\"$")
-    public void iSetCheckboxes(List<Elements> options, boolean status){
-        Elements[] items = options.toArray(new Elements[0]);
+    public void iSetCheckboxes(List<NatureElements> options, boolean status){
+        NatureElements[] items = options.toArray(new NatureElements[0]);
         differentElementsPage.setCheckboxes(items, status);
     }
 

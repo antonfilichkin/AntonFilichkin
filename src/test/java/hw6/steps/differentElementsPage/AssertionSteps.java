@@ -2,7 +2,7 @@ package hw6.steps.differentElementsPage;
 
 import cucumber.api.java.en.Then;
 import enums.Colors;
-import enums.Elements;
+import enums.NatureElements;
 import enums.Metals;
 import enums.URLs;
 import pages.hw6.DifferentElementsPage;
@@ -35,8 +35,8 @@ public class AssertionSteps {
     }
 
     @Then("^Checkboxes \"([^\"]*)\" are .*checked \\(\"([^\"]*)\"\\)$")
-    public void elementsAreChecked(List<Elements> options, boolean status){
-        Elements[] items = options.toArray(new Elements[0]);
+    public void elementsAreChecked(List<NatureElements> options, boolean status){
+        NatureElements[] items = options.toArray(new NatureElements[0]);
         differentElementsPage.assertCheckboxesStatus(items, status);
     }
 

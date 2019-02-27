@@ -16,8 +16,8 @@ import static enums.Users.PITER_CHAILOVSKII;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static enums.Colors.YELLOW;
-import static enums.Elements.WATER;
-import static enums.Elements.WIND;
+import static enums.NatureElements.WATER;
+import static enums.NatureElements.WIND;
 import static enums.Metals.SELEN;
 import static enums.ServiceDropdownItems.DIFFERENT_ELEMENTS;
 import static enums.URLs.DIFFERENT_ELEMENTS_PAGE;
@@ -58,16 +58,16 @@ public class ServicePageInterfaceCheck extends SelenideBase {
         homePage.assertUserName(PITER_CHAILOVSKII);
 
         // 5 Click on "Service" subcategory in the header and check that drop down contains options
-        // "Support, Dates, Complex Table, Simple Table, Tables With pages, Different Elements"	Elements exist
+        // "Support, Dates, Complex Table, Simple Table, Tables With pages, Different NatureElements"	NatureElements exist
         // There are 8 elements in menu and in enum, and we have to check for only 6 of them,
         // my assumption was - what if it is dynamically created menu, and we have to check only for these 6?
         homePage.assertTopMenuServiceDropdownElements(ServiceDropdownItems.values());
 
         // 6 Click on Service subcategory in the left section and check that drop down contains options
-        // 	"Support, Dates, Complex Table, Simple Table, Tables With pages, Different Elements" Elements exist
+        // 	"Support, Dates, Complex Table, Simple Table, Tables With pages, Different NatureElements" NatureElements exist
         homePage.assertLeftSectionServiceDropdown(ServiceDropdownItems.values());
 
-        // 7 Open through the header menu Service -> Different Elements Page
+        // 7 Open through the header menu Service -> Different NatureElements Page
         homePage.headerMenuServiceSelect(DIFFERENT_ELEMENTS);
         differentElementsPage.assertBrowserTitle(DIFFERENT_ELEMENTS_PAGE);
 
@@ -100,7 +100,7 @@ public class ServicePageInterfaceCheck extends SelenideBase {
         //16 Assert that for dropdown there is a log row and value is corresponded to the selected value.
         differentElementsPage.assertLog(YELLOW.valueChanged());
 
-        //17 Unselect and assert checkboxes	Water, Wind	Elements are unchecked
+        //17 Unselect and assert checkboxes	Water, Wind	NatureElements are unchecked
         differentElementsPage.unselectCheckboxes(WATER, WIND);
 
         //18 Assert that for each checkbox there is an individual log row and value is corresponded to the status of checkbox.

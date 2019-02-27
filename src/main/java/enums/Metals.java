@@ -12,6 +12,11 @@ public enum Metals {
         this.metal = metal;
     }
 
+    @Override
+    public String toString() {
+        return metal;
+    }
+
     public String valueChanged() {
         return "metal: value changed to " + metal;
     }

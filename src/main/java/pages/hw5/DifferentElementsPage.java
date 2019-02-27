@@ -3,7 +3,7 @@ package pages.hw5;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.Colors;
-import enums.Elements;
+import enums.NatureElements;
 import enums.Metals;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
@@ -43,15 +43,15 @@ public class DifferentElementsPage extends BaseNavigation {
     }
 
     @Step("Select checkboxes")
-    public void selectCheckboxes(Elements... elements) {
-        for (Elements element : elements) {
+    public void selectCheckboxes(NatureElements... elements) {
+        for (NatureElements element : elements) {
             checkBoxes.get(element.ordinal()).setSelected(true);
         }
     }
 
     @Step("Unselect checkboxes")
-    public void unselectCheckboxes(Elements... elements) {
-        for (Elements element : elements) {
+    public void unselectCheckboxes(NatureElements... elements) {
+        for (NatureElements element : elements) {
             checkBoxes.get(element.ordinal()).setSelected(false);
         }
     }
