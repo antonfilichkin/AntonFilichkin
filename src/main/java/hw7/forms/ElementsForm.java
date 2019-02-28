@@ -23,15 +23,15 @@ import static org.openqa.selenium.By.cssSelector;
 
 public class ElementsForm extends Form<Elements> {
     @Css("#odds-selector > p")
-    RadioButtons odds;
+    private RadioButtons odds;
 
     @Css("#even-selector > p")
-    RadioButtons evens;
+    private RadioButtons evens;
 
     @Css("#elements-checklist")
-    Checklist elements = new HtmlChecklist() {
+    private Checklist elements = new HtmlChecklist() {
         By checkbox = cssSelector("input[type=checkbox][id='%s'] + *");
-        By label = LABEL_LOCATOR;
+        By label = By.xpath(".//label[text()='%s']");
 
         @Override
         public HtmlElement get(String value) {
@@ -48,27 +48,27 @@ public class ElementsForm extends Form<Elements> {
     };
 
     @JDropdown(root = "#colors", value = ".filter-option", list = "li", expand = ".caret")
-    Droplist colors;
+    private Droplist colors;
 
     @JDropdown(root = "#metals", value = ".filter-option", list = "li", expand = ".caret")
-    Droplist metals;
+    private Droplist metals;
 
     @JDropdown(root = "#salad-dropdown", value = ".dropdown-toggle", list = "li", expand = ".caret")
-    Droplist vegetables;
+    private Droplist vegetables;
 
     @Css("#calculate-button")
-    Button calculate;
+    private Button calculate;
 
     @Css("#submit-button")
-    Button submit;
+    private Button submit;
 
     @Override
     public void fill(Elements entity) {
         odds.select(entity.odds);
         evens.select(entity.evens);
         elements.select(entity.elements);
-        colors.select(entity.colors);
-        metals.select(entity.metals);
+        colors.select(entity.color);
+        metals.select(entity.metal);
         selectVegetables(entity.vegetables);
     }
 
@@ -76,12 +76,6 @@ public class ElementsForm extends Form<Elements> {
     public void submit(Elements entity) {
         fill(entity);
         submit.click();
-    }
-
-    //TODO Realise Method
-    @Override
-    public void check(Elements entity) {
-        throw new UnsupportedOperationException();
     }
 
     private void selectVegetables(String... values) {
@@ -98,165 +92,170 @@ public class ElementsForm extends Form<Elements> {
         }
     }
 
-    // ----- Not sure if it is going to work -----
+    // ----- Not sure if it is going to work? => Make sure it won't work! -----
+
+    @Override
+    public void check(Elements entity) {
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
+    }
 
     @Override
     public void fillAction(Field field, Object element, Object parent, String setValue) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public String getAction(Field field, Object element, Object parent) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public FormFilters getFilter() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void setFilterAll() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void setFilter(FormFilters filter) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     protected void fill(MapArray<String, String> map) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public Form<Elements> setPageObject(Object obj) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public List<Field> allFields() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public List<Field> allFields(Object obj) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public Form<Elements> onlyMandatory() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public Form<Elements> onlyOptional() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     protected List<String> verify(MapArray<String, String> map) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public List<String> verify(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     protected void check(MapArray<String, String> map) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void submit(String text) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void submit(String text, String buttonName) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void submit(Elements entity, String buttonName) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     protected void submit(MapArray<String, String> objStrings, String name) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     protected void submit(MapArray<String, String> objStrings) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void login(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void loginAs(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void send(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void add(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void publish(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void save(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void update(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void cancel(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void close(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void back(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void select(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void next(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 
     @Override
     public void search(Elements entity) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("I am going to build my own Form, with methods and buttons... Some day.");
     }
 }

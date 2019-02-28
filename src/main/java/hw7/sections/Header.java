@@ -12,10 +12,10 @@ import hw7.forms.LoginForm;
 import static org.hamcrest.Matchers.equalTo;
 
 public class Header extends WebPage {
-    LoginForm loginForm;
+    public static LoginForm loginForm;
 
     @Css("[id='user-icon']")
-    public Image userIcon;
+    private Image userIcon;
 
     @Css("[id='user-name']")
     private Text userName;
@@ -32,7 +32,7 @@ public class Header extends WebPage {
         userName.assertThat().text(equalTo(user.getFullName().toUpperCase()));
     }
 
-    public void openMenu(Enum<TopMenuItems> element){
+    public void openMenu(Enum<TopMenuItems> element) {
         menu.select(element);
     }
 }
