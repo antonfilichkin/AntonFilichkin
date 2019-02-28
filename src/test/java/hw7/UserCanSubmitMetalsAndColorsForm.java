@@ -28,7 +28,7 @@ public class UserCanSubmitMetalsAndColorsForm {
     @BeforeSuite
     public void beforeSuite() {
         PageFactory.initElements(JDISite.class);
-        WebSettings.logger.setLogLevel(LogLevels.ERROR);
+        WebSettings.logger.setLogLevel(LogLevels.OFF);
         WebSettings.logger.toLog("Run Tests");
     }
 
@@ -50,8 +50,8 @@ public class UserCanSubmitMetalsAndColorsForm {
         metalsAndColorsPage.title().check();
 
         // 3 Fill form Metals & Colors
-        Elements elements =
-                new Elements(3, 8, new NatureElements[]{WIND, EARTH}, RED, SELEN, new Vegetables[]{CUCUMBER, TOMATO});
+        Elements elements = new Elements(
+                3, 8, new NatureElements[]{WIND, EARTH}, RED, SELEN, new Vegetables[]{CUCUMBER, TOMATO});
         elementsForm.submit(elements);
 
         // 4 Check results sections

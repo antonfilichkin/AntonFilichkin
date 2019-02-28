@@ -8,18 +8,18 @@ public enum ResultsLog {
     VEGETABLES ("sal-res","Vegetables: ");
 
     private final String selector;
-    private final String resultString;
+    private final String resultStringStartsWith;
 
-    ResultsLog(String selector, String resultString) {
+    ResultsLog(String selector, String resultStringStartsWith) {
         this.selector = selector;
-        this.resultString = resultString;
+        this.resultStringStartsWith = resultStringStartsWith;
     }
 
     public String getSelector() {
         return selector;
     }
 
-    public String getResultString() {
-        return resultString;
+    public String getResultStringStartsWith() {
+        return resultStringStartsWith;
     }
 }

@@ -39,11 +39,11 @@ public class Elements {
     }
 
     private void generateExpectedResult() {
-        expectedResult.put(SUMM.getSelector(), SUMM.getResultString() + summ(odds, evens));
-        expectedResult.put(ELEMENTS.getSelector(), ELEMENTS.getResultString() + arrayToStringWOParentheses(elements));
-        expectedResult.put(METAL.getSelector(), METAL.getResultString() + metal);
-        expectedResult.put(COLOR.getSelector(), COLOR.getResultString() + color);
-        expectedResult.put(VEGETABLES.getSelector(), VEGETABLES.getResultString() + arrayToStringWOParentheses(vegetables));
+        expectedResult.put(SUMM.getSelector(), SUMM.getResultStringStartsWith() + summ(odds, evens));
+        expectedResult.put(ELEMENTS.getSelector(), ELEMENTS.getResultStringStartsWith() + arrayToStringWOParentheses(elements));
+        expectedResult.put(METAL.getSelector(), METAL.getResultStringStartsWith() + metal);
+        expectedResult.put(COLOR.getSelector(), COLOR.getResultStringStartsWith() + color);
+        expectedResult.put(VEGETABLES.getSelector(), VEGETABLES.getResultStringStartsWith() + arrayToStringWOParentheses(vegetables));
     }
 
     private int summ(String odds, String evens) {
