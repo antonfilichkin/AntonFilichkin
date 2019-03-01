@@ -1,8 +1,13 @@
 package hw7.entities;
 
 import enums.Users;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class User {
+
+    public static User PITER = new User("epam", "1234", "Piter Chailovskii");
+
     String login;
     String password;
     String fullName;
