@@ -9,9 +9,22 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import static enums.Colors.RED;
+import static enums.Metals.SELEN;
+import static enums.NatureElements.EARTH;
+import static enums.NatureElements.WIND;
 import static enums.ResultsLog.*;
+import static enums.Vegetables.CUCUMBER;
+import static enums.Vegetables.TOMATO;
 
 public class Elements {
+
+    public static Elements DEFAULT = new Elements(
+            3, 8,
+            new NatureElements[]{WIND, EARTH},
+            RED, SELEN,
+            new Vegetables[]{CUCUMBER, TOMATO});
+
     public String odds;
     public String evens;
     public String[] elements;

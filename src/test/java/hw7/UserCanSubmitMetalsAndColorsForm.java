@@ -40,21 +40,18 @@ public class UserCanSubmitMetalsAndColorsForm {
     @Test
     public void simpleJdiTest() {
         // 1 Login on JDI site as User: Piter_Chailovskii
-        User user = new User(PITER_CHAILOVSKII);
         homePage.open();
-        header.login(user);
-        header.checkName(user);
+        header.login(User.PITER);
+        header.checkName(User.PITER);
 
         // 2 Open Metals&Colors page by Header menu
         header.openMenu(METALS_COLORS);
         metalsAndColorsPage.title().check();
 
         // 3 Fill form Metals & Colors
-        Elements elements = new Elements(
-                3, 8, new NatureElements[]{WIND, EARTH}, RED, SELEN, new Vegetables[]{CUCUMBER, TOMATO});
-        elementsForm.submit(elements);
+        elementsForm.submit(Elements.DEFAULT);
 
         // 4 Check results sections
-        logSidebar.checkResults(elements);
+        logSidebar.checkResults(Elements.DEFAULT);
     }
 }
