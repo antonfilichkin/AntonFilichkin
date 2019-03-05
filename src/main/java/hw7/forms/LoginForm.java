@@ -3,7 +3,7 @@ package hw7.forms;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.common.TextField;
-import hw7.entities.User;
+import entities.User;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginForm extends Form<User> {

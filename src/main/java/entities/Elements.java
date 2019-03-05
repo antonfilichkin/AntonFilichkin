@@ -1,4 +1,4 @@
-package hw7.entities;
+package entities;
 
 import enums.Colors;
 import enums.Metals;
@@ -23,10 +23,11 @@ public class Elements {
             3, 8,
             new NatureElements[]{WIND, EARTH},
             RED, SELEN,
-            new Vegetables[]{CUCUMBER, TOMATO});
+            new Vegetables[]{CUCUMBER, TOMATO}
+    );
 
-    public String odds;
-    public String evens;
+    public int odds;
+    public int evens;
     public String[] elements;
     public String color;
     public String metal;
@@ -35,12 +36,21 @@ public class Elements {
     private Map<String, String> expectedResult;
 
     public Elements(int odds, int evens, NatureElements[] elements, Colors color, Metals metal, Vegetables[] vegetables) {
-        this.odds = String.valueOf(odds);
-        this.evens = String.valueOf(evens);
+        this.odds = odds;
+        this.evens = evens;
         this.elements = Arrays.stream(elements).sorted().map(Enum::toString).toArray(String[]::new);
-        this.metal = metal.toString();
         this.color = color.toString();
+        this.metal = metal.toString();
         this.vegetables = Arrays.stream(vegetables).sorted().map(Enum::toString).toArray(String[]::new);
+    }
+
+    public Elements(Integer[] numbers, String[] elements, String color, String metal, String[] vegetables) {
+        this.odds = numbers[0];
+        this.evens = numbers[1];
+        this.elements = elements;
+        this.color = color;
+        this.metal = metal;
+        this.vegetables = vegetables;
     }
 
     public Map<String, String> getExpectedResult() {
@@ -52,20 +62,14 @@ public class Elements {
     }
 
     private void generateExpectedResult() {
-        expectedResult.put(SUMM.getSelector(), SUMM.getResultStringStartsWith() + summ(odds, evens));
+        expectedResult.put(SUMM.getSelector(), SUMM.getResultStringStartsWith() + (odds + evens));
         expectedResult.put(ELEMENTS.getSelector(), ELEMENTS.getResultStringStartsWith() + arrayToStringWOParentheses(elements));
         expectedResult.put(METAL.getSelector(), METAL.getResultStringStartsWith() + metal);
         expectedResult.put(COLOR.getSelector(), COLOR.getResultStringStartsWith() + color);
         expectedResult.put(VEGETABLES.getSelector(), VEGETABLES.getResultStringStartsWith() + arrayToStringWOParentheses(vegetables));
     }
 
-    private int summ(String odds, String evens) {
-        return Integer.parseInt(odds) + Integer.parseInt(evens);
-    }
-
     private String arrayToStringWOParentheses(String... stringsArray) {
         return Arrays.toString(stringsArray).replace("[", "").replace("]", "").trim();
     }
-
-
 }

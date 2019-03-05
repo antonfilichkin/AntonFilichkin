@@ -6,7 +6,7 @@ import com.epam.jdi.light.ui.html.common.Image;
 import com.epam.jdi.light.ui.html.common.Text;
 import com.epam.jdi.light.ui.html.complex.Menu;
 import enums.TopMenuItems;
-import hw7.entities.User;
+import entities.User;
 import hw7.forms.LoginForm;
 
 import static org.hamcrest.Matchers.equalTo;

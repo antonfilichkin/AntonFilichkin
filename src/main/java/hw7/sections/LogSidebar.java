@@ -3,7 +3,7 @@ package hw7.sections;
 import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
-import hw7.entities.Elements;
+import entities.Elements;
 import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;

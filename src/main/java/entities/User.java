@@ -1,4 +1,4 @@
-package hw7.entities;
+package entities;
 
 import enums.Users;
 import lombok.AllArgsConstructor;
@@ -20,5 +20,10 @@ public class User {
 
     public String getFullName() {
         return fullName;
+    }
+
+    @Override
+    public String toString() {
+        return fullName + "(login='" + login + "', password='" + password + "')";
     }
 }

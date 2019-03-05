@@ -8,9 +8,9 @@ import hw7.sections.Header;
 
 @JSite("https://epam.github.io/JDI/")
 public class JDISite {
-    static HomePage homePage;
-    static MetalsAndColorsPage metalsAndColorsPage;
+    public static HomePage homePage;
+    public static MetalsAndColorsPage metalsAndColorsPage;
 
     @Css(".uui-header")
-    static Header header;
+    public static Header header;
 }

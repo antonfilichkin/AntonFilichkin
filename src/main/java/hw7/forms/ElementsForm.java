@@ -1,6 +1,5 @@
 package hw7.forms;
 
-import com.epam.jdi.light.common.FormFilters;
 import com.epam.jdi.light.elements.complex.Droplist;
 import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.objects.JDropdown;
@@ -10,12 +9,8 @@ import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
-import com.epam.jdi.tools.map.MapArray;
-import hw7.entities.Elements;
+import entities.Elements;
 import org.openqa.selenium.By;
-
-import java.lang.reflect.Field;
-import java.util.List;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
@@ -64,8 +59,8 @@ public class ElementsForm extends Form<Elements> {
 
     @Override
     public void fill(Elements entity) {
-        odds.select(entity.odds);
-        evens.select(entity.evens);
+        odds.select(String.valueOf(entity.odds));
+        evens.select(String.valueOf(entity.evens));
         elements.select(entity.elements);
         colors.select(entity.color);
         metals.select(entity.metal);
