@@ -24,6 +24,13 @@ public class MetalsAndColorsDataProvider {
         return dataProvider;
     }
 
+    /* TODO Basically, you can work with json in this way, but as for me,
+       org.json is not the best library for deserializing beans, because it does not have
+       such functionality from the spot. Take a look on gson library, for example.
+
+       The main flaw of this particular approach is that you have to hard-code
+       whole field names here, just imagine that you had smth around 10th+ fields(in API hw you definitely will)...
+     */
     private List<Elements> dataSetFromJSON(JSONObject JSONData) {
         List<Elements> testData = new ArrayList<>();
         Iterator<String> dataIterator = JSONData.keys();
