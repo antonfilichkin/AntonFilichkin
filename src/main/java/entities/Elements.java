@@ -1,10 +1,5 @@
 package entities;
 
-import enums.Colors;
-import enums.Metals;
-import enums.NatureElements;
-import enums.Vegetables;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,58 +13,39 @@ import static enums.Vegetables.CUCUMBER;
 import static enums.Vegetables.TOMATO;
 
 public class Elements {
-
     public static Elements DEFAULT = new Elements(
-            3, 8,
-            new NatureElements[]{WIND, EARTH},
-            RED, SELEN,
-            new Vegetables[]{CUCUMBER, TOMATO}
+            new int[] {3, 8},
+            new String[]{WIND.toString(), EARTH.toString()},
+            RED.toString(),
+            SELEN.toString(),
+            new String[]{CUCUMBER.toString(), TOMATO.toString()}
     );
 
-    public int odds;
-    public int evens;
+    public int[] summary;
     public String[] elements;
     public String color;
-    public String metal;
+    public String metals;
     public String[] vegetables;
 
-    private Map<String, String> expectedResult;
-
-    public Elements(int odds, int evens, NatureElements[] elements, Colors color, Metals metal, Vegetables[] vegetables) {
-        this.odds = odds;
-        this.evens = evens;
-        this.elements = Arrays.stream(elements).sorted().map(Enum::toString).toArray(String[]::new);
-        this.color = color.toString();
-        this.metal = metal.toString();
-        this.vegetables = Arrays.stream(vegetables).sorted().map(Enum::toString).toArray(String[]::new);
-    }
-
-    public Elements(Integer[] numbers, String[] elements, String color, String metal, String[] vegetables) {
-        this.odds = numbers[0];
-        this.evens = numbers[1];
+    public Elements(int[] summary, String[] elements, String color, String metals, String[] vegetables) {
+        this.summary = summary;
         this.elements = elements;
         this.color = color;
-        this.metal = metal;
+        this.metals = metals;
         this.vegetables = vegetables;
     }
 
-    public Map<String, String> getExpectedResult() {
-        if (expectedResult == null) {
-            expectedResult = new HashMap<>();
-            generateExpectedResult();
-        }
+    public static Map<String, String> getExpectedResult(Elements elements) {
+        Map<String, String> expectedResult = new HashMap<>();
+        expectedResult.put(SUMM.getSelector(), SUMM.getResultStringStartsWith() + (elements.summary[0] + elements.summary[1]));
+        expectedResult.put(ELEMENTS.getSelector(), ELEMENTS.getResultStringStartsWith() + arrayToStringWOParentheses(elements.elements));
+        expectedResult.put(METAL.getSelector(), METAL.getResultStringStartsWith() + elements.metals);
+        expectedResult.put(COLOR.getSelector(), COLOR.getResultStringStartsWith() + elements.color);
+        expectedResult.put(VEGETABLES.getSelector(), VEGETABLES.getResultStringStartsWith() + arrayToStringWOParentheses(elements.vegetables));
         return expectedResult;
     }
 
-    private void generateExpectedResult() {
-        expectedResult.put(SUMM.getSelector(), SUMM.getResultStringStartsWith() + (odds + evens));
-        expectedResult.put(ELEMENTS.getSelector(), ELEMENTS.getResultStringStartsWith() + arrayToStringWOParentheses(elements));
-        expectedResult.put(METAL.getSelector(), METAL.getResultStringStartsWith() + metal);
-        expectedResult.put(COLOR.getSelector(), COLOR.getResultStringStartsWith() + color);
-        expectedResult.put(VEGETABLES.getSelector(), VEGETABLES.getResultStringStartsWith() + arrayToStringWOParentheses(vegetables));
-    }
-
-    private String arrayToStringWOParentheses(String... stringsArray) {
+    private static String arrayToStringWOParentheses(String[] stringsArray) {
         return Arrays.toString(stringsArray).replace("[", "").replace("]", "").trim();
     }
 }

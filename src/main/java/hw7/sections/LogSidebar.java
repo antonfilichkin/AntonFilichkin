@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.simple.Css;
 import entities.Elements;
+import entities.ElementsJSON;
 import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
@@ -20,6 +21,14 @@ public class LogSidebar extends WebPage {
     private WebList results;
 
     public void checkResults(Elements elements) {
+        Map<String, String> logValues = new HashMap<>();
+        for (WebElement webElement : results) {
+            logValues.put(webElement.getAttribute("class"), webElement.getText());
+        }
+        assertThat(logValues, equalTo(Elements.getExpectedResult(elements)));
+    }
+
+    public void checkResults(ElementsJSON elements) {
         Map<String, String> logValues = new HashMap<>();
         for (WebElement webElement : results) {
             logValues.put(webElement.getAttribute("class"), webElement.getText());

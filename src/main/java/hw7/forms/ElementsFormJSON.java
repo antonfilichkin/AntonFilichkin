@@ -9,14 +9,14 @@ import com.epam.jdi.light.ui.html.base.HtmlElement;
 import com.epam.jdi.light.ui.html.common.Button;
 import com.epam.jdi.light.ui.html.complex.Checklist;
 import com.epam.jdi.light.ui.html.complex.RadioButtons;
-import entities.Elements;
+import entities.ElementsJSON;
 import org.openqa.selenium.By;
 
 import static com.epam.jdi.light.driver.WebDriverByUtils.fillByTemplate;
 import static com.epam.jdi.light.ui.html.HtmlFactory.$;
 import static org.openqa.selenium.By.cssSelector;
 
-public class ElementsForm extends Form<Elements> {
+public class ElementsFormJSON extends Form<ElementsJSON> {
     @Css("#odds-selector > p")
     private RadioButtons odds;
 
@@ -58,17 +58,17 @@ public class ElementsForm extends Form<Elements> {
     private Button submit;
 
     @Override
-    public void fill(Elements entity) {
-        odds.select(String.valueOf(entity.summary[0]));
-        evens.select(String.valueOf(entity.summary[1]));
+    public void fill(ElementsJSON entity) {
+        odds.select(String.valueOf(entity.odds));
+        evens.select(String.valueOf(entity.evens));
         elements.select(entity.elements);
         colors.select(entity.color);
-        metals.select(entity.metals);
+        metals.select(entity.metal);
         selectVegetables(entity.vegetables);
     }
 
     @Override
-    public void submit(Elements entity) {
+    public void submit(ElementsJSON entity) {
         fill(entity);
         submit.click();
     }

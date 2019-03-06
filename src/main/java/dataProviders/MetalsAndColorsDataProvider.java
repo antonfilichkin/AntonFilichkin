@@ -1,21 +1,23 @@
 package dataProviders;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
 import entities.Elements;
-import org.json.JSONObject;
 import org.testng.annotations.DataProvider;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import static utils.JSONUtils.parseJSONFile;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.*;
 
 public class MetalsAndColorsDataProvider {
     private final static String DATA_FILE = "src/test/resources/hw8/metalsColorsDataSet.json";
 
     @DataProvider(name = "MetalsAndColors")
     public Object[][] metalsColorsDataProvider() {
-        List<Elements> dataSet = dataSetFromJSON(parseJSONFile(DATA_FILE));
+        List<Elements> dataSet = getTestDataFromJSON(DATA_FILE);
         Iterator<Elements> dataSetIterator = dataSet.iterator();
         Object[][] dataProvider = new Object[dataSet.size()][1];
         for (Object[] each : dataProvider) {
@@ -24,27 +26,20 @@ public class MetalsAndColorsDataProvider {
         return dataProvider;
     }
 
-    /* TODO Basically, you can work with json in this way, but as for me,
-       org.json is not the best library for deserializing beans, because it does not have
-       such functionality from the spot. Take a look on gson library, for example.
-
-       The main flaw of this particular approach is that you have to hard-code
-       whole field names here, just imagine that you had smth around 10th+ fields(in API hw you definitely will)...
-     */
-    private List<Elements> dataSetFromJSON(JSONObject JSONData) {
+    @SuppressWarnings("unchecked")
+    private List<Elements> getTestDataFromJSON(String path) {
+        Map<String, LinkedTreeMap> rawData = new HashMap<>();
         List<Elements> testData = new ArrayList<>();
-        Iterator<String> dataIterator = JSONData.keys();
-        while (dataIterator.hasNext()) {
-            String key = dataIterator.next();
-            JSONObject o = JSONData.getJSONObject(key);
-            Elements e = new Elements(
-                    o.getJSONArray("summary").toList().toArray(new Integer[0]),
-                    o.getJSONArray("elements").toList().toArray(new String[0]),
-                    o.getString("color"),
-                    o.getString("metals"),
-                    o.getJSONArray("vegetables").toList().toArray(new String[0])
-            );
-            testData.add(e);
+        Gson gson = new Gson();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            rawData = gson.fromJson(br, rawData.getClass());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (LinkedTreeMap value : rawData.values()) {
+            testData.add(gson.fromJson(value.toString(), Elements.class));
         }
         return testData;
     }

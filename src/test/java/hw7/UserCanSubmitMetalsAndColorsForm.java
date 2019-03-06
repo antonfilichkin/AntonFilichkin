@@ -4,7 +4,7 @@ import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.logger.LogLevels;
 import com.epam.jdi.light.settings.WebSettings;
 import com.epam.jdi.light.ui.html.PageFactory;
-import entities.Elements;
+import entities.ElementsJSON;
 import entities.User;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import static enums.TopMenuItems.METALS_COLORS;
 import static hw7.JDISite.*;
-import static hw7.pages.MetalsAndColorsPage.elementsForm;
+import static hw7.pages.MetalsAndColorsPage.elementsFormJSON;
 import static hw7.pages.MetalsAndColorsPage.logSidebar;
 
 public class UserCanSubmitMetalsAndColorsForm {
@@ -40,9 +40,9 @@ public class UserCanSubmitMetalsAndColorsForm {
         metalsAndColorsPage.title().check();
 
         // 3 Fill form Metals & Colors
-        elementsForm.submit(Elements.DEFAULT);
+        elementsFormJSON.submit(ElementsJSON.DEFAULT);
 
         // 4 Check results sections
-        logSidebar.checkResults(Elements.DEFAULT);
+        logSidebar.checkResults(ElementsJSON.DEFAULT);
     }
 }

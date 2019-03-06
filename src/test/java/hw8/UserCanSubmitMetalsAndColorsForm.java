@@ -8,7 +8,10 @@ import dataProviders.MetalsAndColorsDataProvider;
 import entities.Elements;
 import entities.User;
 import hw7.JDISite;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.elements.composite.WebPage.refresh;
 import static enums.TopMenuItems.METALS_COLORS;
